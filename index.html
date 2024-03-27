@@ -2,12 +2,42 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./src/style.css" />
     <title>Josh - Calculator</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div class="screen">
+      <h1 id="screen__output-header"></h1>
+    </div>
+    <div class="screen">
+      <h1 id="screen__output-header2"></h1>
+    </div>
+    <div class="button-container">
+      <div class="button-container__operations-buttons">
+        <input type="button" value="+" id="Plus" />
+        <input type="button" value="-" id="Subtract" />
+        <input type="button" value="*" id="Multiply" />
+        <input type="button" value="/" id="Divide" />
+      </div>
+      <div class="button-container__numbers-buttons">
+        <input type="button" value="0" id="button--0" />
+        <input type="button" value="1" id="button--1" />
+        <input type="button" value="2" id="button--2" />
+        <input type="button" value="3" id="button--3" />
+        <input type="button" value="4" id="button--4" />
+        <input type="button" value="5" id="button--5" />
+        <input type="button" value="6" id="button--6" />
+        <input type="button" value="7" id="button--7" />
+        <input type="button" value="8" id="button--8" />
+        <input type="button" value="9" id="button--9" />
+      </div>
+      <div class="button-container__other-buttons">
+        <input type="button" value="=" id="button--equals" />
+        <input type="button" value="CLEAR" id="button--clear" />
+        <input type="button" value="+-" id="button--plusMinus" />
+      </div>
+    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

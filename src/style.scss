@@ -13,10 +13,12 @@
   justify-content: flex-end;
   align-items: center;
   font-size: 6vh;
+
+  #screen__output-header {
+    color: white;
+  }
+
+  #screen__output-header2 {
+    color: white;
+  }
 }
-.screen #screen__output-header {
-  color: white;
-}
-.screen #screen__output-header2 {
-  color: white;
-}/*# sourceMappingURL=style.css.map */
