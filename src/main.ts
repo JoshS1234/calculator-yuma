@@ -25,6 +25,10 @@ console.log(equalsButton);
 const clearButton: HTMLButtonElement = document.querySelector("#button--clear");
 console.log(clearButton);
 
+const plusMinusButton: HTMLButtonElement =
+  document.querySelector("#button--plusMinus");
+console.log(plusMinusButton);
+
 if (!numberButtons) {
   throw new Error("number button issue");
 } else if (!operationsButtons) {
@@ -39,6 +43,10 @@ if (!numberButtons) {
   throw new Error("clear button issue");
 }
 
+//useful variables
+let calculation = [];
+let hasEqualled = false;
+
 //handle functions
 const handleNumberClick = (e: Event) => {
   if (["+", "-", "*", "/"].includes(screenHeader.textContent)) {
@@ -52,13 +60,15 @@ const handleNumberClick = (e: Event) => {
   screenHeader2.textContent = calculation.join(" ");
 };
 
-let calculation = [];
-
 const handleOperationClick = (e: Event) => {
   const target = e.target as HTMLInputElement;
   if (!screenHeader.textContent) {
-    alert("cannot start with operator");
-    return;
+    if (target.value == "*" || target.value == "/") {
+      alert("cannot start with operators * OR /");
+      return;
+    } else {
+      screenHeader.textContent = target.value;
+    }
   } else if (["+", "-", "x", "/"].includes(screenHeader.textContent)) {
     screenHeader.textContent = target.value;
     return;
@@ -71,14 +81,16 @@ const handleOperationClick = (e: Event) => {
 };
 
 const handleEqualsClick = (e: Event) => {
-  if (["+", "-", "x", "/"].includes(screenHeader.textContent)) {
+  if (!["+", "-", "x", "/"].includes(screenHeader.textContent)) {
+    calculation.push(parseFloat(screenHeader.textContent));
     screenHeader.textContent = "";
   }
-  calculation.push(parseFloat(screenHeader.textContent));
   screenHeader.textContent = "Answer: ";
   const fullQuestion = calculation.join(" ");
+  console.log(fullQuestion);
   const answer = eval(fullQuestion);
   screenHeader2.textContent = fullQuestion + "=" + `${answer}`;
+  hasEqualled = true;
 };
 
 const handleClearScreen = (e: Event) => {
@@ -86,6 +98,8 @@ const handleClearScreen = (e: Event) => {
   screenHeader2.textContent = "";
   calculation = [];
 };
+
+const handlePlusMinusButtonClick = (e: Event) => {};
 
 //eventListeners
 //setup objects to store buttons
