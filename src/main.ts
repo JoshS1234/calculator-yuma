@@ -26,6 +26,14 @@ const plusMinusButton: HTMLButtonElement = document.querySelector(
   "#button-container__button--plusMinus"
 );
 
+const squareButton: HTMLButtonElement = document.querySelector(
+  "#button-container__button--square"
+);
+
+const sqrtButton: HTMLButtonElement = document.querySelector(
+  "#button-container__button--sqrt"
+);
+
 if (!numberButtons) {
   throw new Error("number button issue");
 } else if (!operationsButtons) {
@@ -40,6 +48,10 @@ if (!numberButtons) {
   throw new Error("clear button issue");
 } else if (!plusMinusButton) {
   throw new Error("plusMinus button issue");
+} else if (!squareButton) {
+  throw new Error("square button issue");
+} else if (!sqrtButton) {
+  throw new Error("squareRoot button issue");
 }
 
 //useful variables
@@ -54,41 +66,54 @@ const clearAll = () => {
 
 const myEval = (calcString: string): number => {
   let calcArr = calcString.split(" ");
-
-  while (calcArr.includes("*")) {
-    const pos = calcArr.indexOf("*");
-    const miniAns = parseFloat(calcArr[pos - 1]) * parseFloat(calcArr[pos + 1]);
-    calcArr = calcArr
-      .slice(0, pos - 1)
-      .concat([`${miniAns}`])
-      .concat(calcArr.slice(pos + 2));
+  if (calcArr.length == 2) {
+    return parseFloat(calcArr.join(""));
   }
 
-  while (calcArr.includes("/")) {
-    const pos = calcArr.indexOf("/");
-    const miniAns = parseFloat(calcArr[pos - 1]) / parseFloat(calcArr[pos + 1]);
+  calcArr = calcArr.map((element) => {
+    if (element[0] == "√") {
+      return Math.sqrt(parseFloat(element.slice(1))).toString();
+    } else {
+      return element;
+    }
+  });
+
+  while (calcArr.includes("*") || calcArr.includes("/")) {
+    let i = 0;
+    while (calcArr[i] !== "*" && calcArr[i] !== "/") {
+      i++;
+    }
+
+    let miniAns;
+    if (calcArr[i] == "*") {
+      miniAns = parseFloat(calcArr[i - 1]) * parseFloat(calcArr[i + 1]);
+    } else if (calcArr[i] == "/") {
+      miniAns = parseFloat(calcArr[i - 1]) / parseFloat(calcArr[i + 1]);
+    }
+
     calcArr = calcArr
-      .slice(0, pos - 1)
+      .slice(0, i - 1)
       .concat([`${miniAns}`])
-      .concat(calcArr.slice(pos + 2));
+      .concat(calcArr.slice(i + 2));
   }
 
-  while (calcArr.includes("+")) {
-    const pos = calcArr.indexOf("+");
-    const miniAns = parseFloat(calcArr[pos - 1]) + parseFloat(calcArr[pos + 1]);
-    calcArr = calcArr
-      .slice(0, pos - 1)
-      .concat([`${miniAns}`])
-      .concat(calcArr.slice(pos + 2));
-  }
+  while (calcArr.includes("+") || calcArr.includes("-")) {
+    let i = 0;
+    while (calcArr[i] !== "+" && calcArr[i] !== "-") {
+      i++;
+    }
 
-  while (calcArr.includes("-")) {
-    const pos = calcArr.indexOf("-");
-    const miniAns = parseFloat(calcArr[pos - 1]) - parseFloat(calcArr[pos + 1]);
+    let miniAns;
+    if (calcArr[i] == "+") {
+      miniAns = parseFloat(calcArr[i - 1]) + parseFloat(calcArr[i + 1]);
+    } else if (calcArr[i] == "-") {
+      miniAns = parseFloat(calcArr[i - 1]) - parseFloat(calcArr[i + 1]);
+    }
+
     calcArr = calcArr
-      .slice(0, pos - 1)
+      .slice(0, i - 1)
       .concat([`${miniAns}`])
-      .concat(calcArr.slice(pos + 2));
+      .concat(calcArr.slice(i + 2));
   }
 
   return parseFloat(calcArr[0]);
@@ -96,19 +121,19 @@ const myEval = (calcString: string): number => {
 
 //handle functions
 const handleNumberClick = (e: Event) => {
+  const target = e.target as HTMLInputElement;
   if (hasEqualled) {
     clearAll();
     hasEqualled = false;
   }
 
-  //   if (screenHeader.textContent == "-" || screenHeader.textContent !== "+") {
-  //   } else
-
+  // if (screenHeader.textContent == "-") {
+  // } else if (screenHeader.textContent == "+") {
+  // } else
   if (["+", "-", "*", "/"].includes(screenHeader.textContent)) {
     calculation.push(screenHeader.textContent);
     screenHeader.textContent = "";
   }
-  const target = e.target as HTMLInputElement;
   screenHeader.textContent += target.value;
 
   screenHeader2.textContent = calculation.join(" ");
@@ -127,10 +152,8 @@ const handleOperationClick = (e: Event) => {
     if (target.value == "*" || target.value == "/") {
       alert("cannot start calculation with operators * OR /");
       return;
-    } else {
-      screenHeader.textContent = target.value;
     }
-  } else if (["+", "-", "x", "/"].includes(screenHeader.textContent)) {
+  } else if (["+", "-", "*", "/", "√"].includes(screenHeader.textContent)) {
     screenHeader.textContent = target.value;
     return;
   } else {
@@ -142,7 +165,7 @@ const handleOperationClick = (e: Event) => {
 
 const handleEqualsClick = (e: Event) => {
   if (!hasEqualled) {
-    if (!["+", "-", "x", "/"].includes(screenHeader.textContent)) {
+    if (!["+", "-", "*", "/"].includes(screenHeader.textContent)) {
       calculation.push(screenHeader.textContent);
       screenHeader.textContent = "";
     }
@@ -172,14 +195,31 @@ const handlePlusMinusButtonClick = (e: Event) => {
     }
   } else {
     screenHeader.textContent = "";
-    if (calculation[calculation.length - 1][0] == "-") {
-      calculation[calculation.length - 1] =
-        calculation[calculation.length - 1].slice(1);
-      screenHeader2.textContent = calculation[calculation.length - 1];
+    if (screenHeader2.textContent[0] == "-") {
+      screenHeader2.textContent = screenHeader2.textContent?.slice(1);
     } else {
-      calculation[calculation.length - 1] =
-        "-" + calculation[calculation.length - 1];
-      screenHeader2.textContent = calculation[calculation.length - 1];
+      screenHeader2.textContent = "-" + screenHeader2.textContent;
+    }
+  }
+};
+
+const handleSquare = (e: Event) => {
+  console.log("square button pressed");
+};
+
+const handleSqrt = (e: Event) => {
+  if (hasEqualled) {
+    screenHeader.textContent = "√" + screenHeader2.textContent;
+    screenHeader2.textContent = myEval(screenHeader.textContent);
+  } else {
+    if (/[0-9]/.test(screenHeader.textContent[0])) {
+      screenHeader.textContent = "√" + screenHeader.textContent;
+    } else if (screenHeader.textContent == "") {
+      screenHeader.textContent = "√";
+    } else if (["+", "-", "*", "/"].includes(screenHeader.textContent)) {
+      calculation.push(screenHeader.textContent);
+      screenHeader2.textContent += calculation.join(" ");
+      screenHeader.textContent = "√";
     }
   }
 };
@@ -207,3 +247,5 @@ operationsButtons.forEach((operationButton) => {
 equalsButton.addEventListener("click", handleEqualsClick);
 clearButton.addEventListener("click", handleClearScreen);
 plusMinusButton.addEventListener("click", handlePlusMinusButtonClick);
+squareButton.addEventListener("click", handleSquare);
+sqrtButton.addEventListener("click", handleSqrt);
