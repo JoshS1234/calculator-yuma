@@ -4,15 +4,24 @@
   box-sizing: border-box;
 }
 
-.screen {
-  width: 100%;
-  height: 10vh;
+body {
   background-color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 5px solid blue;
+  padding: 20px;
+}
+
+.screen {
+  width: 80%;
+  height: 10vh;
+  background-color: rgb(0, 71, 0);
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: flex-start;
-  margin: 10px auto;
+  margin: 1vh auto;
 }
 .screen .screen__output-header {
   color: white;
@@ -23,10 +32,10 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(5, 1fr);
+  grid-template-areas: "clr plusMinus plusMinus divide" "seven eight nine mult" "four five six minus" "one two three plus" "nought nought nought equals";
   justify-items: center;
-  width: 100%;
-  height: -moz-fit-content;
-  height: fit-content;
+  width: 80%;
+  height: 70vh;
 }
 .button-container #button-container__button--plus {
   grid-area: plus;
@@ -35,67 +44,59 @@
   grid-area: minus;
 }
 .button-container #button-container__button--multiply {
-  grid-area: "multiply";
+  grid-area: mult;
 }
 .button-container #button-container__button--divide {
   grid-area: divide;
 }
 .button-container #button-container__button--0 {
-  grid-area: 0;
+  grid-area: nought;
 }
 .button-container #button-container__button--1 {
-  grid-area: 1;
+  grid-area: one;
 }
 .button-container #button-container__button--2 {
-  grid-area: 2;
+  grid-area: two;
 }
 .button-container #button-container__button--3 {
-  grid-area: 3;
+  grid-area: three;
 }
 .button-container #button-container__button--4 {
-  grid-area: 4;
+  grid-area: four;
 }
 .button-container #button-container__button--5 {
-  grid-area: 5;
+  grid-area: five;
 }
 .button-container #button-container__button--6 {
-  grid-area: 6;
+  grid-area: six;
 }
 .button-container #button-container__button--7 {
-  grid-area: 7;
+  grid-area: seven;
 }
 .button-container #button-container__button--8 {
-  grid-area: 8;
+  grid-area: eight;
 }
 .button-container #button-container__button--9 {
-  grid-area: 9;
+  grid-area: nine;
 }
 .button-container #button-container__button--plusMinus {
   grid-area: plusMinus;
 }
 .button-container #button-container__button--clear {
-  grid-area: clear;
+  grid-area: clr;
 }
 .button-container #button-container__button--equals {
   grid-area: equals;
 }
 .button-container .button-container__button {
-  min-width: 50px;
-  width: 25%;
-  max-width: 100px;
-  min-height: 50px;
-  height: 20%;
-  max-height: 20%;
-  border-radius: 50%;
-  background-color: black;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  max-height: 100%;
+  background-color: rgb(29, 27, 27);
   color: white;
+  font-size: 3rem;
 }
 .button-container .button-container__button--operation {
-  color: red;
-}
-.button-container .button-container__button--number {
-  color: yellow;
-}
-.button-container .button-container__button--other {
-  color: green;
+  background-color: orange;
 }/*# sourceMappingURL=style.css.map */
