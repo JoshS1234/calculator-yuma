@@ -13,12 +13,9 @@
   justify-content: flex-end;
   align-items: center;
   font-size: 6vh;
+  margin: 10px auto;
 
-  #screen__output-header {
-    color: white;
-  }
-
-  #screen__output-header2 {
+  .screen__output-header {
     color: white;
   }
 }
