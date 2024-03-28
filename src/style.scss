@@ -14,7 +14,7 @@ body {
 }
 
 .screen {
-  width: 80%;
+  width: 90%;
   height: 10vh;
   background-color: rgb(0, 71, 0);
   display: flex;
@@ -33,10 +33,10 @@ body {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(5, 1fr);
-  grid-template-areas: "clr plusMinus plusMinus divide" "seven eight nine mult" "four five six minus" "one two three plus" "nought nought nought equals";
+  grid-template-areas: "clr plusMinus plusMinus divide" "seven eight nine mult" "four five six minus" "one two three plus" "nought squared sqrt equals";
   // align-content: center;
   justify-items: center;
-  width: 80%;
+  width: 90%;
   height: 70vh;
 
   #button-container__button--plus {
@@ -105,6 +105,14 @@ body {
 
   #button-container__button--equals {
     grid-area: equals;
+  }
+
+  #button-container__button--squared {
+    grid-area: squared;
+  }
+
+  #button-container__button--sqrt {
+    grid-area: sqrt;
   }
 
   .button-container__button {
