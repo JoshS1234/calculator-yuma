@@ -1,9 +1,9 @@
-const numberButtons = document.querySelector(
-  ".button-container__number-buttons"
+const numberButtons = document.querySelectorAll(
+  ".button-container__button--number"
 );
 
-const operationsButtons = document.querySelector(
-  ".button-container__operations-buttons"
+const operationsButtons = document.querySelectorAll(
+  ".button-container__button--operation"
 );
 
 const screenHeader: HTMLHeadingElement = document.querySelector(
@@ -14,13 +14,17 @@ const screenHeader2: HTMLHeadingElement = document.querySelector(
   ".screen__output-header--2"
 );
 
-const equalsButton: HTMLButtonElement =
-  document.querySelector("#button--equals");
+const equalsButton: HTMLButtonElement = document.querySelector(
+  "#button-container__button--equals"
+);
 
-const clearButton: HTMLButtonElement = document.querySelector("#button--clear");
+const clearButton: HTMLButtonElement = document.querySelector(
+  "#button-container__button--clear"
+);
 
-const plusMinusButton: HTMLButtonElement =
-  document.querySelector("#button--plusMinus");
+const plusMinusButton: HTMLButtonElement = document.querySelector(
+  "#button-container__button--plusMinus"
+);
 
 if (!numberButtons) {
   throw new Error("number button issue");
@@ -142,14 +146,15 @@ const handleEqualsClick = (e: Event) => {
       calculation.push(screenHeader.textContent);
       screenHeader.textContent = "";
     }
-    screenHeader.textContent = "Answer: ";
     const fullQuestion = calculation.join(" ");
     console.log("MyEval", `${fullQuestion}`, myEval(`${fullQuestion}`));
     // const answer = eval(fullQuestion);
-    const answer = myEval;
+    const answer = myEval(fullQuestion);
+    screenHeader.textContent = `${fullQuestion + " = "}`;
     calculation.push("=");
     calculation.push(answer);
-    screenHeader2.textContent = `${calculation.join(" ")}`;
+    // screenHeader2.textContent = `${calculation.join(" ")}`;
+    screenHeader2.textContent = `${answer}`;
     hasEqualled = true;
   }
 };
@@ -166,6 +171,7 @@ const handlePlusMinusButtonClick = (e: Event) => {
       screenHeader.textContent = screenHeader.textContent?.slice(1);
     }
   } else {
+    screenHeader.textContent = "";
     if (calculation[calculation.length - 1][0] == "-") {
       calculation[calculation.length - 1] =
         calculation[calculation.length - 1].slice(1);
@@ -180,17 +186,23 @@ const handlePlusMinusButtonClick = (e: Event) => {
 
 //eventListeners
 //setup objects to store buttons
-const numberObj = {};
-for (let numberButton of numberButtons?.children) {
+// const numberObj = {};
+// for (let numberButton of numberButtons) {
+//   numberButton.addEventListener("click", handleNumberClick);
+//   numberObj[numberButton.value] = numberButton;
+// }
+numberButtons.forEach((numberButton) => {
   numberButton.addEventListener("click", handleNumberClick);
-  numberObj[numberButton.value] = numberButton;
-}
+});
 
-const operationObj = {};
-for (let operationsButton of operationsButtons?.children) {
-  operationsButton.addEventListener("click", handleOperationClick);
-  operationObj[operationsButton.value] = operationsButton;
-}
+// const operationObj = {};
+// for (let operationsButton of operationsButtons) {
+//   operationsButton.addEventListener("click", handleOperationClick);
+//   operationObj[operationsButton.value] = operationsButton;
+// }
+operationsButtons.forEach((operationButton) => {
+  operationButton.addEventListener("click", handleOperationClick);
+});
 
 equalsButton.addEventListener("click", handleEqualsClick);
 clearButton.addEventListener("click", handleClearScreen);
