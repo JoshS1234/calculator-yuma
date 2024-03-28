@@ -1,33 +1,26 @@
 const numberButtons = document.querySelector(
-  ".button-container__numbers-buttons"
+  ".button-container__number-buttons"
 );
-console.log(numberButtons);
 
 const operationsButtons = document.querySelector(
   ".button-container__operations-buttons"
 );
-console.log(operationsButtons);
 
 const screenHeader: HTMLHeadingElement = document.querySelector(
   ".screen__output-header--1"
 );
-console.log(screenHeader);
 
 const screenHeader2: HTMLHeadingElement = document.querySelector(
   ".screen__output-header--2"
 );
-console.log(screenHeader2);
 
 const equalsButton: HTMLButtonElement =
   document.querySelector("#button--equals");
-console.log(equalsButton);
 
 const clearButton: HTMLButtonElement = document.querySelector("#button--clear");
-console.log(clearButton);
 
 const plusMinusButton: HTMLButtonElement =
   document.querySelector("#button--plusMinus");
-console.log(plusMinusButton);
 
 if (!numberButtons) {
   throw new Error("number button issue");
@@ -48,11 +41,59 @@ if (!numberButtons) {
 //useful variables
 let calculation = [];
 let hasEqualled = false;
+const clearAll = () => {
+  screenHeader.textContent = "";
+  screenHeader2.textContent = "";
+  calculation = [];
+  hasEqualled = false;
+};
+
+const myEval = (calcString: string): number => {
+  let calcArr = calcString.split(" ");
+
+  while (calcArr.includes("*")) {
+    const pos = calcArr.indexOf("*");
+    const miniAns = parseFloat(calcArr[pos - 1]) * parseFloat(calcArr[pos + 1]);
+    calcArr = calcArr
+      .slice(0, pos - 1)
+      .concat([`${miniAns}`])
+      .concat(calcArr.slice(pos + 2));
+  }
+
+  while (calcArr.includes("/")) {
+    const pos = calcArr.indexOf("/");
+    const miniAns = parseFloat(calcArr[pos - 1]) / parseFloat(calcArr[pos + 1]);
+    calcArr = calcArr
+      .slice(0, pos - 1)
+      .concat([`${miniAns}`])
+      .concat(calcArr.slice(pos + 2));
+  }
+
+  while (calcArr.includes("+")) {
+    const pos = calcArr.indexOf("+");
+    const miniAns = parseFloat(calcArr[pos - 1]) + parseFloat(calcArr[pos + 1]);
+    calcArr = calcArr
+      .slice(0, pos - 1)
+      .concat([`${miniAns}`])
+      .concat(calcArr.slice(pos + 2));
+  }
+
+  while (calcArr.includes("-")) {
+    const pos = calcArr.indexOf("-");
+    const miniAns = parseFloat(calcArr[pos - 1]) - parseFloat(calcArr[pos + 1]);
+    calcArr = calcArr
+      .slice(0, pos - 1)
+      .concat([`${miniAns}`])
+      .concat(calcArr.slice(pos + 2));
+  }
+
+  return parseFloat(calcArr[0]);
+};
 
 //handle functions
 const handleNumberClick = (e: Event) => {
   if (hasEqualled) {
-    handleClearScreen();
+    clearAll();
     hasEqualled = false;
   }
 
@@ -64,7 +105,6 @@ const handleNumberClick = (e: Event) => {
     screenHeader.textContent = "";
   }
   const target = e.target as HTMLInputElement;
-  console.log(target.value);
   screenHeader.textContent += target.value;
 
   screenHeader2.textContent = calculation.join(" ");
@@ -74,7 +114,7 @@ const handleOperationClick = (e: Event) => {
   if (hasEqualled) {
     //continue calculation from answer
     const ans = screenHeader2.textContent;
-    handleClearScreen();
+    clearAll();
     screenHeader.textContent = ans;
     hasEqualled = false;
   }
@@ -90,8 +130,7 @@ const handleOperationClick = (e: Event) => {
     screenHeader.textContent = target.value;
     return;
   } else {
-    calculation.push(parseFloat(screenHeader.textContent));
-    console.log(target.value);
+    calculation.push(screenHeader.textContent);
     screenHeader.textContent = target.value;
     screenHeader2.textContent = calculation.join(" ");
   }
@@ -100,25 +139,23 @@ const handleOperationClick = (e: Event) => {
 const handleEqualsClick = (e: Event) => {
   if (!hasEqualled) {
     if (!["+", "-", "x", "/"].includes(screenHeader.textContent)) {
-      calculation.push(parseFloat(screenHeader.textContent));
+      calculation.push(screenHeader.textContent);
       screenHeader.textContent = "";
     }
     screenHeader.textContent = "Answer: ";
     const fullQuestion = calculation.join(" ");
-    const answer = eval(fullQuestion);
+    console.log("MyEval", `${fullQuestion}`, myEval(`${fullQuestion}`));
+    // const answer = eval(fullQuestion);
+    const answer = myEval;
     calculation.push("=");
     calculation.push(answer);
-    console.log(calculation.join(" "));
     screenHeader2.textContent = `${calculation.join(" ")}`;
     hasEqualled = true;
   }
 };
 
 const handleClearScreen = (e: Event) => {
-  screenHeader.textContent = "";
-  screenHeader2.textContent = "";
-  calculation = [];
-  hasEqualled = false;
+  clearAll();
 };
 
 const handlePlusMinusButtonClick = (e: Event) => {
@@ -129,10 +166,14 @@ const handlePlusMinusButtonClick = (e: Event) => {
       screenHeader.textContent = screenHeader.textContent?.slice(1);
     }
   } else {
-    if (screenHeader2.textContent[0] == "-") {
-      screenHeader2.textContent = screenHeader2.textContent?.slice(1);
+    if (calculation[calculation.length - 1][0] == "-") {
+      calculation[calculation.length - 1] =
+        calculation[calculation.length - 1].slice(1);
+      screenHeader2.textContent = calculation[calculation.length - 1];
     } else {
-      screenHeader2.textContent = "-" + screenHeader2.textContent;
+      calculation[calculation.length - 1] =
+        "-" + calculation[calculation.length - 1];
+      screenHeader2.textContent = calculation[calculation.length - 1];
     }
   }
 };
@@ -144,14 +185,12 @@ for (let numberButton of numberButtons?.children) {
   numberButton.addEventListener("click", handleNumberClick);
   numberObj[numberButton.value] = numberButton;
 }
-console.log(numberObj);
 
 const operationObj = {};
 for (let operationsButton of operationsButtons?.children) {
   operationsButton.addEventListener("click", handleOperationClick);
   operationObj[operationsButton.value] = operationsButton;
 }
-console.log(operationObj);
 
 equalsButton.addEventListener("click", handleEqualsClick);
 clearButton.addEventListener("click", handleClearScreen);
