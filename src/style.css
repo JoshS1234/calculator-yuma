@@ -20,46 +20,43 @@
 }
 
 .button-container {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  justify-items: center;
   width: 100%;
   height: -moz-fit-content;
   height: fit-content;
-  justify-content: space-around;
-  align-items: center;
+}
+.button-container #button-container__button--plus {
+  grid-area: plus;
+}
+.button-container #button-container__button--minus {
+  grid-area: minus;
+}
+.button-container #button-container__button--multiply {
+  grid-area: "multiply";
+}
+.button-container #button-container__button--divide {
+  grid-area: divide;
 }
 .button-container .button-container__button {
-  width: 20%;
-  height: 80px;
+  min-width: 50px;
+  width: 25%;
+  max-width: 100px;
+  min-height: 50px;
+  height: 20%;
+  max-height: 20%;
   border-radius: 50%;
+  background-color: black;
+  color: white;
 }
-.button-container .button-container__operations-buttons {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  width: 90%;
-  background-color: red;
-  margin: 0 auto;
+.button-container .button-container__button--operation {
+  color: red;
 }
-.button-container .button-container__number-buttons {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  width: 90%;
-  background-color: red;
-  margin: 0 auto;
+.button-container .button-container__button--number {
+  color: yellow;
 }
-.button-container .button-container__other-buttons {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  width: 90%;
-  background-color: red;
-  margin: 0 auto;
-}
-.button-container .button-container__buttons {
-  width: 20%;
+.button-container .button-container__button--other {
+  color: green;
 }/*# sourceMappingURL=style.css.map */
