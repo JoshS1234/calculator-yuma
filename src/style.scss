@@ -45,6 +45,58 @@
     grid-area: divide;
   }
 
+  #button-container__button--0 {
+    grid-area: 0;
+  }
+
+  #button-container__button--1 {
+    grid-area: 1;
+  }
+
+  #button-container__button--2 {
+    grid-area: 2;
+  }
+
+  #button-container__button--3 {
+    grid-area: 3;
+  }
+
+  #button-container__button--4 {
+    grid-area: 4;
+  }
+
+  #button-container__button--5 {
+    grid-area: 5;
+  }
+
+  #button-container__button--6 {
+    grid-area: 6;
+  }
+
+  #button-container__button--7 {
+    grid-area: 7;
+  }
+
+  #button-container__button--8 {
+    grid-area: 8;
+  }
+
+  #button-container__button--9 {
+    grid-area: 9;
+  }
+
+  #button-container__button--plusMinus {
+    grid-area: plusMinus;
+  }
+
+  #button-container__button--clear {
+    grid-area: clear;
+  }
+
+  #button-container__button--equals {
+    grid-area: equals;
+  }
+
   .button-container__button {
     min-width: 50px;
     width: 25%;
