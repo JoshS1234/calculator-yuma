@@ -9,12 +9,12 @@ const operationsButtons = document.querySelector(
 console.log(operationsButtons);
 
 const screenHeader: HTMLHeadingElement = document.querySelector(
-  "#screen__output-header"
+  ".screen__output-header--1"
 );
 console.log(screenHeader);
 
 const screenHeader2: HTMLHeadingElement = document.querySelector(
-  "#screen__output-header2"
+  ".screen__output-header--2"
 );
 console.log(screenHeader2);
 
@@ -55,6 +55,10 @@ const handleNumberClick = (e: Event) => {
     handleClearScreen();
     hasEqualled = false;
   }
+
+  //   if (screenHeader.textContent == "-" || screenHeader.textContent !== "+") {
+  //   } else
+
   if (["+", "-", "*", "/"].includes(screenHeader.textContent)) {
     calculation.push(screenHeader.textContent);
     screenHeader.textContent = "";
@@ -77,7 +81,7 @@ const handleOperationClick = (e: Event) => {
   const target = e.target as HTMLInputElement;
   if (!screenHeader.textContent) {
     if (target.value == "*" || target.value == "/") {
-      alert("cannot start with operators * OR /");
+      alert("cannot start calculation with operators * OR /");
       return;
     } else {
       screenHeader.textContent = target.value;
@@ -105,7 +109,7 @@ const handleEqualsClick = (e: Event) => {
     calculation.push("=");
     calculation.push(answer);
     console.log(calculation.join(" "));
-    screenHeader2.textContent = `${answer}`;
+    screenHeader2.textContent = `${calculation.join(" ")}`;
     hasEqualled = true;
   }
 };
