@@ -41,6 +41,8 @@ if (!numberButtons) {
   throw new Error("equals button issue");
 } else if (!clearButton) {
   throw new Error("clear button issue");
+} else if (!plusMinusButton) {
+  throw new Error("plusMinus button issue");
 }
 
 //useful variables
@@ -49,6 +51,10 @@ let hasEqualled = false;
 
 //handle functions
 const handleNumberClick = (e: Event) => {
+  if (hasEqualled) {
+    handleClearScreen();
+    hasEqualled = false;
+  }
   if (["+", "-", "*", "/"].includes(screenHeader.textContent)) {
     calculation.push(screenHeader.textContent);
     screenHeader.textContent = "";
@@ -61,6 +67,13 @@ const handleNumberClick = (e: Event) => {
 };
 
 const handleOperationClick = (e: Event) => {
+  if (hasEqualled) {
+    //continue calculation from answer
+    const ans = screenHeader2.textContent;
+    handleClearScreen();
+    screenHeader.textContent = ans;
+    hasEqualled = false;
+  }
   const target = e.target as HTMLInputElement;
   if (!screenHeader.textContent) {
     if (target.value == "*" || target.value == "/") {
@@ -81,25 +94,44 @@ const handleOperationClick = (e: Event) => {
 };
 
 const handleEqualsClick = (e: Event) => {
-  if (!["+", "-", "x", "/"].includes(screenHeader.textContent)) {
-    calculation.push(parseFloat(screenHeader.textContent));
-    screenHeader.textContent = "";
+  if (!hasEqualled) {
+    if (!["+", "-", "x", "/"].includes(screenHeader.textContent)) {
+      calculation.push(parseFloat(screenHeader.textContent));
+      screenHeader.textContent = "";
+    }
+    screenHeader.textContent = "Answer: ";
+    const fullQuestion = calculation.join(" ");
+    const answer = eval(fullQuestion);
+    calculation.push("=");
+    calculation.push(answer);
+    console.log(calculation.join(" "));
+    screenHeader2.textContent = `${answer}`;
+    hasEqualled = true;
   }
-  screenHeader.textContent = "Answer: ";
-  const fullQuestion = calculation.join(" ");
-  console.log(fullQuestion);
-  const answer = eval(fullQuestion);
-  screenHeader2.textContent = fullQuestion + "=" + `${answer}`;
-  hasEqualled = true;
 };
 
 const handleClearScreen = (e: Event) => {
   screenHeader.textContent = "";
   screenHeader2.textContent = "";
   calculation = [];
+  hasEqualled = false;
 };
 
-const handlePlusMinusButtonClick = (e: Event) => {};
+const handlePlusMinusButtonClick = (e: Event) => {
+  if (!hasEqualled) {
+    if (/[0-9]/.test(screenHeader.textContent[0])) {
+      screenHeader.textContent = "-" + screenHeader.textContent;
+    } else if (screenHeader.textContent[0] == "-") {
+      screenHeader.textContent = screenHeader.textContent?.slice(1);
+    }
+  } else {
+    if (screenHeader2.textContent[0] == "-") {
+      screenHeader2.textContent = screenHeader2.textContent?.slice(1);
+    } else {
+      screenHeader2.textContent = "-" + screenHeader2.textContent;
+    }
+  }
+};
 
 //eventListeners
 //setup objects to store buttons
@@ -119,3 +151,4 @@ console.log(operationObj);
 
 equalsButton.addEventListener("click", handleEqualsClick);
 clearButton.addEventListener("click", handleClearScreen);
+plusMinusButton.addEventListener("click", handlePlusMinusButtonClick);
