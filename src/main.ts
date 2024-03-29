@@ -73,16 +73,22 @@ const clearAll = () => {
 const myEval = (calcString: string): number => {
   let calcArr = calcString.split(" ");
   if (calcArr.length == 2) {
-    return parseFloat(calcArr.join(""));
+    return parseFloat(calcString);
   }
 
   calcArr = calcArr.map((element) => {
-    if (element[0] == "√") {
+    if (element[0] == "√" && element[element.length - 1] == "²") {
+      console.log("both");
+      return element.slice(1, -1);
+    } else if (element[0] == "√") {
       return Math.sqrt(parseFloat(element.slice(1))).toString();
+    } else if (element[element.length - 1] == "²") {
+      return parseFloat(element.slice(0, -1) ** 2).toString();
     } else {
       return element;
     }
   });
+  console.log(calcArr);
 
   while (calcArr.includes("*") || calcArr.includes("/")) {
     let i = 0;
@@ -207,7 +213,23 @@ const handlePlusMinusButtonClick = (e: Event) => {
 };
 
 const handleSquare = (e: Event) => {
-  console.log("square button pressed");
+  const currentNumber = screenHeader.textContent;
+
+  if (hasEqualled) {
+    screenHeader.textContent = screenHeader2.textContent + "²";
+    screenHeader2.textContent =
+      parseFloat(screenHeader.textContent.slice(0, -1)) ** 2;
+  } else {
+    if (currentNumber[currentNumber.length - 1] == "²") {
+      screenHeader.textContent = screenHeader.textContent?.slice(0, -1);
+    } else if (/[0-9]/.test(screenHeader.textContent[0])) {
+      screenHeader.textContent = screenHeader.textContent + "²";
+    } else if (screenHeader.textContent[0] == "√") {
+      screenHeader.textContent = screenHeader.textContent + "²";
+    } else if (screenHeader.textContent == "") {
+    } else if (["+", "-", "*", "/"].includes(screenHeader.textContent)) {
+    }
+  }
 };
 
 const handleSqrt = (e: Event) => {
@@ -223,6 +245,8 @@ const handleSqrt = (e: Event) => {
       calculation.push(screenHeader.textContent);
       screenHeader2.textContent += calculation.join(" ");
       screenHeader.textContent = "√";
+    } else if (screenHeader.textContent[0] == "√") {
+      screenHeader.textContent = screenHeader.textContent?.slice(1);
     }
   }
 };
