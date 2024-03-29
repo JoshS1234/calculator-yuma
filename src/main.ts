@@ -86,22 +86,16 @@ const myEval = (calcString: string): number => {
   }
 
   calcArr = calcArr.map((element) => {
-    //   if (element[0] == "√" && element[element.length - 1] == "²") {
-    //     return element.slice(1, -1);
-    //   } else if (element[0] == "√") {
-    //     return Math.sqrt(parseFloat(element.slice(1))).toString();
-    //   } else if (element[element.length - 1] == "²") {
-    //     return parseFloat(element.slice(0, -1) ** 2).toString();
-    //   } else if (element.slice(0, 2) == "-√") {
-    //   } else {
-    //     return element;
-    //   }
-    // });
+    if (element[0] == "√" && element[1] == "-") {
+      clearAll();
+      alert("Maths error!!! cannot square root negative numbers");
+      return;
+    }
     if (element[0] == "-") {
       if (element[1] == "√" && element[element.length - 1] == "²") {
-        return "-" + element.slice(1, -1);
+        return "-" + element.slice(2, -1);
       } else if (element[1] == "√") {
-        return -Math.sqrt(parseFloat(element.slice(1))).toString();
+        return "-" + Math.sqrt(parseFloat(element.slice(2))).toString();
       } else if (element[element.length - 1] == "²") {
         return "-" + (parseFloat(element.slice(0, -1)) ** 2).toString();
       } else {
@@ -113,12 +107,16 @@ const myEval = (calcString: string): number => {
       } else if (element[0] == "√") {
         return Math.sqrt(parseFloat(element.slice(1))).toString();
       } else if (element[element.length - 1] == "²") {
-        return "-" + (parseFloat(element.slice(0, -1)) ** 2).toString();
+        return (parseFloat(element.slice(0, -1)) ** 2).toString();
       } else {
         return element;
       }
     }
   });
+  if (calcArr.length == 1) {
+    console.log(calcArr);
+    return parseFloat(calcArr[0]);
+  }
   console.log(calcArr);
 
   while (calcArr.includes("*") || calcArr.includes("/")) {
@@ -165,16 +163,20 @@ const myEval = (calcString: string): number => {
 //handle functions
 const handleNumberClick = (e: Event) => {
   const target = e.target as HTMLInputElement;
+  //if a number is pressed after an answer has been found, overwrite and start new calculation
   if (hasEqualled) {
     clearAll();
     hasEqualled = false;
   }
+
   if (["+", "-", "*", "/"].includes(screenHeader.textContent)) {
     calculation.push(screenHeader.textContent);
     screenHeader.textContent = "";
+  } else if (screenHeader.textContent == "√") {
+    screenHeader.textContent += target.value;
+  } else if (/\d*/.test(screenHeader.textContent)) {
+    screenHeader.textContent += target.value;
   }
-  screenHeader.textContent += target.value;
-
   screenHeader2.textContent = calculation.join(" ");
 };
 
@@ -227,7 +229,7 @@ const handleClearScreen = (e: Event) => {
 
 const handlePlusMinusButtonClick = (e: Event) => {
   if (!hasEqualled) {
-    if (/√?[0-9]/.test(screenHeader.textContent)) {
+    if (/^√?[0-9]/.test(screenHeader.textContent)) {
       screenHeader.textContent = "-" + screenHeader.textContent;
     } else if (screenHeader.textContent[0] == "-") {
       screenHeader.textContent = screenHeader.textContent?.slice(1);
@@ -247,17 +249,17 @@ const handleSquare = (e: Event) => {
 
   if (hasEqualled) {
     screenHeader.textContent = screenHeader2.textContent + "²";
-    screenHeader2.textContent =
-      parseFloat(screenHeader.textContent.slice(0, -1)) ** 2;
+    screenHeader2.textContent = myEval(screenHeader.textContent);
   } else {
     if (currentNumber[currentNumber.length - 1] == "²") {
       screenHeader.textContent = screenHeader.textContent?.slice(0, -1);
-    } else if (/[0-9]/.test(screenHeader.textContent[0])) {
+    } else if (/-?√?[0-9]/.test(screenHeader.textContent)) {
       screenHeader.textContent = screenHeader.textContent + "²";
     } else if (screenHeader.textContent[0] == "√") {
       screenHeader.textContent = screenHeader.textContent + "²";
     } else if (screenHeader.textContent == "") {
     } else if (["+", "-", "*", "/"].includes(screenHeader.textContent)) {
+      console.log("blah");
     }
   }
 };
@@ -267,8 +269,12 @@ const handleSqrt = (e: Event) => {
     screenHeader.textContent = "√" + screenHeader2.textContent;
     screenHeader2.textContent = myEval(screenHeader.textContent);
   } else {
-    console.log(calculation);
-    if (/[0-9]/.test(screenHeader.textContent[0])) {
+    if (/√/.test(screenHeader.textContent)) {
+      screenHeader.textContent = screenHeader.textContent
+        ?.split("")
+        .filter((element) => element != "√")
+        .join("");
+    } else if (/-?[0-9]/.test(screenHeader.textContent)) {
       screenHeader.textContent = "√" + screenHeader.textContent;
     } else if (screenHeader.textContent == "") {
       screenHeader.textContent = "√";
@@ -276,8 +282,6 @@ const handleSqrt = (e: Event) => {
       calculation.push(screenHeader.textContent);
       screenHeader2.textContent = calculation.join(" ");
       screenHeader.textContent = "√";
-    } else if (screenHeader.textContent[0] == "√") {
-      screenHeader.textContent = screenHeader.textContent?.slice(1);
     }
   }
 };
