@@ -67,7 +67,7 @@ if (!numberButtons) {
 }
 
 //useful variables
-let calculation = [];
+let calculation: string[] = [];
 let hasEqualled = false;
 const clearAll = () => {
   screenHeader.textContent = "";
@@ -77,7 +77,7 @@ const clearAll = () => {
 };
 
 const myEval = (calcString: string): number => {
-  if (calcString == "") {
+  if (calcString == "" || calcString == "√") {
     return 0;
   }
   let calcArr = calcString.split(" ");
@@ -86,15 +86,37 @@ const myEval = (calcString: string): number => {
   }
 
   calcArr = calcArr.map((element) => {
-    if (element[0] == "√" && element[element.length - 1] == "²") {
-      console.log("both");
-      return element.slice(1, -1);
-    } else if (element[0] == "√") {
-      return Math.sqrt(parseFloat(element.slice(1))).toString();
-    } else if (element[element.length - 1] == "²") {
-      return parseFloat(element.slice(0, -1) ** 2).toString();
+    //   if (element[0] == "√" && element[element.length - 1] == "²") {
+    //     return element.slice(1, -1);
+    //   } else if (element[0] == "√") {
+    //     return Math.sqrt(parseFloat(element.slice(1))).toString();
+    //   } else if (element[element.length - 1] == "²") {
+    //     return parseFloat(element.slice(0, -1) ** 2).toString();
+    //   } else if (element.slice(0, 2) == "-√") {
+    //   } else {
+    //     return element;
+    //   }
+    // });
+    if (element[0] == "-") {
+      if (element[1] == "√" && element[element.length - 1] == "²") {
+        return "-" + element.slice(1, -1);
+      } else if (element[1] == "√") {
+        return -Math.sqrt(parseFloat(element.slice(1))).toString();
+      } else if (element[element.length - 1] == "²") {
+        return "-" + (parseFloat(element.slice(0, -1)) ** 2).toString();
+      } else {
+        return element;
+      }
     } else {
-      return element;
+      if (element[0] == "√" && element[element.length - 1] == "²") {
+        return element.slice(1, -1);
+      } else if (element[0] == "√") {
+        return Math.sqrt(parseFloat(element.slice(1))).toString();
+      } else if (element[element.length - 1] == "²") {
+        return "-" + (parseFloat(element.slice(0, -1)) ** 2).toString();
+      } else {
+        return element;
+      }
     }
   });
   console.log(calcArr);
@@ -147,7 +169,6 @@ const handleNumberClick = (e: Event) => {
     clearAll();
     hasEqualled = false;
   }
-
   if (["+", "-", "*", "/"].includes(screenHeader.textContent)) {
     calculation.push(screenHeader.textContent);
     screenHeader.textContent = "";
@@ -183,7 +204,7 @@ const handleOperationClick = (e: Event) => {
 
 const handleEqualsClick = (e: Event) => {
   if (!hasEqualled) {
-    if (!["+", "-", "*", "/"].includes(screenHeader.textContent)) {
+    if (!["+", "-", "*", "/", "√"].includes(screenHeader.textContent)) {
       calculation.push(screenHeader.textContent);
       screenHeader.textContent = "";
     }
@@ -206,7 +227,7 @@ const handleClearScreen = (e: Event) => {
 
 const handlePlusMinusButtonClick = (e: Event) => {
   if (!hasEqualled) {
-    if (/[0-9]/.test(screenHeader.textContent[0])) {
+    if (/√?[0-9]/.test(screenHeader.textContent)) {
       screenHeader.textContent = "-" + screenHeader.textContent;
     } else if (screenHeader.textContent[0] == "-") {
       screenHeader.textContent = screenHeader.textContent?.slice(1);
