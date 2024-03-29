@@ -1,3 +1,4 @@
+//import any buttons
 const numberButtons = document.querySelectorAll(
   ".button-container__button--number"
 );
@@ -34,14 +35,15 @@ const sqrtButton: HTMLButtonElement = document.querySelector(
   "#button-container__button--sqrt"
 );
 
-const ranIntButton: HTMLButtonElement = document.querySelector(
-  "#button-container__button--ranInt"
+const ranButton: HTMLButtonElement = document.querySelector(
+  "#button-container__button--ran"
 );
 
 const backspaceButton: HTMLButtonElement = document.querySelector(
   "#button-container__button--backspace"
 );
 
+//error handling with button imports from HTML
 if (!numberButtons) {
   throw new Error("number button issue");
 } else if (!operationsButtons) {
@@ -60,15 +62,18 @@ if (!numberButtons) {
   throw new Error("square button issue");
 } else if (!sqrtButton) {
   throw new Error("squareRoot button issue");
-} else if (!ranIntButton) {
-  throw new Error("ranInt button issue");
+} else if (!ranButton) {
+  throw new Error("ran button issue");
 } else if (!backspaceButton) {
   throw new Error("backspace button issue");
 }
 
 //useful variables
+//calculation keeps track of the overall calculation
 let calculation: string[] = [];
+//hasEqualled keeps track of whether an answer is showing
 let hasEqualled = false;
+//wipes the screen, calculation and starts a new calculation
 const clearAll = () => {
   screenHeader.textContent = "";
   screenHeader2.textContent = "";
@@ -76,15 +81,19 @@ const clearAll = () => {
   hasEqualled = false;
 };
 
+//My version of the "eval()" function. It can handle negatives, squares and square roots.
+//Is a very complicated system to account for lots of edge cases involving ordering of negatives, roots and squares
 const myEval = (calcString: string): number => {
+  //checks for a non-calculation
   if (calcString == "" || calcString == "√") {
     return 0;
   }
   let calcArr = calcString.split(" ");
-  if (calcArr.length == 2) {
-    return parseFloat(calcString);
-  }
+  // if (calcArr.length == 2) {
+  //   return parseFloat(calcString);
+  // }
 
+  //sorts through individual elements, looking for squares, square roots and negatives (or any combination of these)
   calcArr = calcArr.map((element) => {
     if (element[0] == "√" && element[1] == "-") {
       clearAll();
@@ -113,12 +122,12 @@ const myEval = (calcString: string): number => {
       }
     }
   });
+  //returns single step calculations (eg: square, square root, negatives)
   if (calcArr.length == 1) {
-    console.log(calcArr);
     return parseFloat(calcArr[0]);
   }
-  console.log(calcArr);
 
+  //does any multiplications/divisions (left to right)
   while (calcArr.includes("*") || calcArr.includes("/")) {
     let i = 0;
     while (calcArr[i] !== "*" && calcArr[i] !== "/") {
@@ -138,6 +147,7 @@ const myEval = (calcString: string): number => {
       .concat(calcArr.slice(i + 2));
   }
 
+  //does any additions/subtractions (left to right)
   while (calcArr.includes("+") || calcArr.includes("-")) {
     let i = 0;
     while (calcArr[i] !== "+" && calcArr[i] !== "-") {
@@ -169,72 +179,89 @@ const handleNumberClick = (e: Event) => {
     hasEqualled = false;
   }
 
+  //if there is an operator, push it to the calculation array and keep this number in storage
   if (["+", "-", "*", "/"].includes(screenHeader.textContent)) {
     calculation.push(screenHeader.textContent);
-    screenHeader.textContent = "";
-  } else if (screenHeader.textContent == "√") {
+    screenHeader.textContent = target.value;
+  }
+  //if it is a root, allow numbers to follow
+  else if (screenHeader.textContent == "√") {
     screenHeader.textContent += target.value;
   } else if (/\d*/.test(screenHeader.textContent)) {
     screenHeader.textContent += target.value;
+  } else {
+    alert("Issue with number buttons, edge case");
   }
   screenHeader2.textContent = calculation.join(" ");
 };
 
 const handleOperationClick = (e: Event) => {
+  //continue calculation from answer
   if (hasEqualled) {
-    //continue calculation from answer
     const ans = screenHeader2.textContent;
     clearAll();
     screenHeader.textContent = ans;
     hasEqualled = false;
   }
+
   const target = e.target as HTMLInputElement;
+  //can't start calculation with * or /
   if (!screenHeader.textContent) {
     if (target.value == "*" || target.value == "/") {
       alert("cannot start calculation with operators * OR /");
       return;
     }
-  } else if (["+", "-", "*", "/", "√"].includes(screenHeader.textContent)) {
+  }
+  //operators will overwrite each other
+  else if (["+", "-", "*", "/", "√"].includes(screenHeader.textContent)) {
     screenHeader.textContent = target.value;
     return;
-  } else {
+  }
+  //if it is a number then push the number to the calculation array
+  else if (/\d+/.test(screenHeader.textContent)) {
     calculation.push(screenHeader.textContent);
     screenHeader.textContent = target.value;
     screenHeader2.textContent = calculation.join(" ");
+  } else {
+    alert("issue with operation, edge case");
   }
 };
 
 const handleEqualsClick = (e: Event) => {
   if (!hasEqualled) {
+    //if there is just a hanging operator, just ignore it and do the rest of the calculation
     if (!["+", "-", "*", "/", "√"].includes(screenHeader.textContent)) {
       calculation.push(screenHeader.textContent);
       screenHeader.textContent = "";
     }
+
+    //collect together the calculation from the array, then pass to myEval to calculate
     const fullQuestion = calculation.join(" ");
-    console.log("MyEval", `${fullQuestion}`, myEval(`${fullQuestion}`));
-    // const answer = eval(fullQuestion);
     const answer = myEval(fullQuestion);
     screenHeader.textContent = `${fullQuestion + " = "}`;
     calculation.push("=");
     calculation.push(answer);
-    // screenHeader2.textContent = `${calculation.join(" ")}`;
     screenHeader2.textContent = `${answer}`;
     hasEqualled = true;
   }
 };
 
 const handleClearScreen = (e: Event) => {
+  //wipes out both screens, calculation array, and hasEqualled
   clearAll();
 };
 
 const handlePlusMinusButtonClick = (e: Event) => {
+  //flips the sign of a number in the storage screen
   if (!hasEqualled) {
     if (/^√?[0-9]/.test(screenHeader.textContent)) {
       screenHeader.textContent = "-" + screenHeader.textContent;
     } else if (screenHeader.textContent[0] == "-") {
       screenHeader.textContent = screenHeader.textContent?.slice(1);
     }
-  } else {
+  }
+  //if there is an answer already, flips the sign of the answer
+  else {
     screenHeader.textContent = "";
     if (screenHeader2.textContent[0] == "-") {
       screenHeader2.textContent = screenHeader2.textContent?.slice(1);
@@ -247,54 +274,72 @@ const handlePlusMinusButtonClick = (e: Event) => {
 const handleSquare = (e: Event) => {
   const currentNumber = screenHeader.textContent;
 
+  //if there is an answer already, squares the answer as the first step of a new calculation
   if (hasEqualled) {
     screenHeader.textContent = screenHeader2.textContent + "²";
     screenHeader2.textContent = myEval(screenHeader.textContent);
-  } else {
+  }
+  //if it is partway through a calculation, square the value in the top screen
+  else {
+    //removes square if it is already squared
     if (currentNumber[currentNumber.length - 1] == "²") {
       screenHeader.textContent = screenHeader.textContent?.slice(0, -1);
-    } else if (/-?√?[0-9]/.test(screenHeader.textContent)) {
+    }
+    //adds square symbol if it is not present
+    else if (/-?√?[0-9]/.test(screenHeader.textContent)) {
       screenHeader.textContent = screenHeader.textContent + "²";
-    } else if (screenHeader.textContent[0] == "√") {
-      screenHeader.textContent = screenHeader.textContent + "²";
-    } else if (screenHeader.textContent == "") {
-    } else if (["+", "-", "*", "/"].includes(screenHeader.textContent)) {
-      console.log("blah");
+    } else {
+      alert("issue with square, edge case");
     }
   }
 };
 
 const handleSqrt = (e: Event) => {
+  //if there is an answer already, begins new calculation with square root of answer
   if (hasEqualled) {
     screenHeader.textContent = "√" + screenHeader2.textContent;
     screenHeader2.textContent = myEval(screenHeader.textContent);
-  } else {
+  }
+  //if partway through a calculation, adds sqrt at the start of the line
+  else {
+    //if there is a square root already, removes it
     if (/√/.test(screenHeader.textContent)) {
       screenHeader.textContent = screenHeader.textContent
         ?.split("")
         .filter((element) => element != "√")
         .join("");
-    } else if (/-?[0-9]/.test(screenHeader.textContent)) {
+    }
+    //if it is a positive or negative number, adds sqrt at the start (myEval is set to handle square roots of negatives)
+    else if (/-?[0-9]+/.test(screenHeader.textContent)) {
       screenHeader.textContent = "√" + screenHeader.textContent;
-    } else if (screenHeader.textContent == "") {
+    }
+    //if it is empty, starts with a sqrt
+    else if (screenHeader.textContent == "") {
       screenHeader.textContent = "√";
-    } else if (["+", "-", "*", "/"].includes(screenHeader.textContent)) {
+    }
+    //if it is an operator, replaces it with sqrt
+    else if (["+", "-", "*", "/"].includes(screenHeader.textContent)) {
       calculation.push(screenHeader.textContent);
       screenHeader2.textContent = calculation.join(" ");
       screenHeader.textContent = "√";
+    } else {
+      alert("Issue with sqrt, edge case");
     }
   }
 };
 
-const handleRanInt = () => {
-  console.log("random int pressed");
-  const randomIntString = Math.ceil(Math.random() * 10).toString();
+const handleRan = () => {
+  //creates a random number from 0 to 1
+
+  const randomIntString = Math.random().toString();
+  //if there is an answer on screen, wipe and start with random number
   if (hasEqualled) {
-    //if there is an answer on screen, wipe and start with random number
     clearAll();
     screenHeader.textContent = randomIntString;
     screenHeader2.textContent = "";
-  } else {
+  }
+  //if it is partway through a calculation, acts the same as deleting current number and typing a random number
+  else {
     //check if a current number (positive or negative) is on screen, if so, replace it
     if (/-?\d/.test(screenHeader.textContent)) {
       screenHeader.textContent = randomIntString;
@@ -307,6 +352,8 @@ const handleRanInt = () => {
     } else if (screenHeader.textContent == "√") {
       screenHeader.textContent += target.value;
       screenHeader2.textContent = calculation.join(" ");
+    } else {
+      alert("issue with random number, edge case");
     }
   }
 };
@@ -335,5 +382,5 @@ clearButton.addEventListener("click", handleClearScreen);
 plusMinusButton.addEventListener("click", handlePlusMinusButtonClick);
 squareButton.addEventListener("click", handleSquare);
 sqrtButton.addEventListener("click", handleSqrt);
-ranIntButton.addEventListener("click", handleRanInt);
+ranButton.addEventListener("click", handleRan);
 backspaceButton.addEventListener("click", handleBackspace);

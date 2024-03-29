@@ -32,7 +32,7 @@ body {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(6, 1fr);
-  grid-template-areas: "clr backspace ranInt divide" "seven eight nine mult" "four five six minus" "one two three plus" "nought squared sqrt plusMinus" "equals equals equals equals";
+  grid-template-areas: "clr backspace ran divide" "seven eight nine mult" "four five six minus" "one two three plus" "nought squared sqrt plusMinus" "equals equals equals equals";
   // align-content: center;
   justify-items: center;
   width: 90%;
@@ -68,9 +68,9 @@ body {
     grid-area: plus;
   }
 
-  #button-container__button--ranInt {
-    grid-area: ranInt;
-    font-size: 1.5rem;
+  #button-container__button--ran {
+    grid-area: ran;
+    font-size: 1rem;
   }
 
   #button-container__button--minus {
