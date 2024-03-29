@@ -43,6 +43,14 @@ const backspaceButton: HTMLButtonElement = document.querySelector(
   "#button-container__button--backspace"
 );
 
+const lightModeButton: HTMLButtonElement = document.querySelector(
+  ".footer__light-mode-button"
+);
+
+const calcScreenButton: HTMLButtonElement = document.querySelector(
+  ".footer__calc-screen-button"
+);
+
 //error handling with button imports from HTML
 if (!numberButtons) {
   throw new Error("number button issue");
@@ -66,6 +74,10 @@ if (!numberButtons) {
   throw new Error("ran button issue");
 } else if (!backspaceButton) {
   throw new Error("backspace button issue");
+} else if (!lightModeButton) {
+  throw new Error("light mode button issue");
+} else if (!calcScreenButton) {
+  throw new Error("calc screen mode button issue");
 }
 
 //useful variables
@@ -373,6 +385,10 @@ const handleBackspace = () => {
   }
 };
 
+const handleLightMode = () => {
+  console.log("light mode");
+};
+
 //eventListeners
 numberButtons.forEach((numberButton) => {
   numberButton.addEventListener("click", handleNumberClick);
@@ -389,3 +405,4 @@ squareButton.addEventListener("click", handleSquare);
 sqrtButton.addEventListener("click", handleSqrt);
 ranButton.addEventListener("click", handleRan);
 backspaceButton.addEventListener("click", handleBackspace);
+lightModeButton.addEventListener("click", handleLightMode);

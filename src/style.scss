@@ -156,10 +156,17 @@ body {
   }
 }
 
-.footer__title {
-  color: $main-writing-color;
-  font-family: $logo-font;
-  font-size: min(10vw, 40px);
+footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 90%;
+
+  .footer__title {
+    color: $main-writing-color;
+    font-family: $logo-font;
+    font-size: min(10vw, 40px);
+  }
 }
 
 @media screen and (min-width: 768px) {
