@@ -210,6 +210,11 @@ const handleOperationClick = (e: Event) => {
     if (target.value == "*" || target.value == "/") {
       alert("cannot start calculation with operators * OR /");
       return;
+    } else if (target.value == "-" || target.value == "+") {
+      alert(
+        "to do positive/negative numbers, write number and then use plus/minus button"
+      );
+      return;
     }
   }
   //operators will overwrite each other
