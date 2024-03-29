@@ -34,8 +34,12 @@ const sqrtButton: HTMLButtonElement = document.querySelector(
   "#button-container__button--sqrt"
 );
 
-const percentageButton: HTMLButtonElement = document.querySelector(
-  "#button-container__button--percentage"
+const ranIntButton: HTMLButtonElement = document.querySelector(
+  "#button-container__button--ranInt"
+);
+
+const backspaceButton: HTMLButtonElement = document.querySelector(
+  "#button-container__button--backspace"
 );
 
 if (!numberButtons) {
@@ -56,8 +60,10 @@ if (!numberButtons) {
   throw new Error("square button issue");
 } else if (!sqrtButton) {
   throw new Error("squareRoot button issue");
-} else if (!percentageButton) {
-  throw new Error("percentage button issue");
+} else if (!ranIntButton) {
+  throw new Error("ranInt button issue");
+} else if (!backspaceButton) {
+  throw new Error("backspace button issue");
 }
 
 //useful variables
@@ -71,6 +77,9 @@ const clearAll = () => {
 };
 
 const myEval = (calcString: string): number => {
+  if (calcString == "") {
+    return 0;
+  }
   let calcArr = calcString.split(" ");
   if (calcArr.length == 2) {
     return parseFloat(calcString);
@@ -237,17 +246,53 @@ const handleSqrt = (e: Event) => {
     screenHeader.textContent = "√" + screenHeader2.textContent;
     screenHeader2.textContent = myEval(screenHeader.textContent);
   } else {
+    console.log(calculation);
     if (/[0-9]/.test(screenHeader.textContent[0])) {
       screenHeader.textContent = "√" + screenHeader.textContent;
     } else if (screenHeader.textContent == "") {
       screenHeader.textContent = "√";
     } else if (["+", "-", "*", "/"].includes(screenHeader.textContent)) {
       calculation.push(screenHeader.textContent);
-      screenHeader2.textContent += calculation.join(" ");
+      screenHeader2.textContent = calculation.join(" ");
       screenHeader.textContent = "√";
     } else if (screenHeader.textContent[0] == "√") {
       screenHeader.textContent = screenHeader.textContent?.slice(1);
     }
+  }
+};
+
+const handleRanInt = () => {
+  console.log("random int pressed");
+  const randomIntString = Math.ceil(Math.random() * 10).toString();
+  if (hasEqualled) {
+    //if there is an answer on screen, wipe and start with random number
+    clearAll();
+    screenHeader.textContent = randomIntString;
+    screenHeader2.textContent = "";
+  } else {
+    //check if a current number (positive or negative) is on screen, if so, replace it
+    if (/-?\d/.test(screenHeader.textContent)) {
+      screenHeader.textContent = randomIntString;
+    } else if (screenHeader.textContent == "") {
+      screenHeader.textContent = randomIntString;
+    } else if (["+", "-", "*", "/"].includes(screenHeader.textContent)) {
+      calculation.push(screenHeader.textContent);
+      screenHeader2.textContent = calculation.join(" ");
+      screenHeader.textContent = randomIntString;
+    } else if (screenHeader.textContent == "√") {
+      screenHeader.textContent += target.value;
+      screenHeader2.textContent = calculation.join(" ");
+    }
+  }
+};
+
+const handleBackspace = () => {
+  if (!hasEqualled) {
+    if (screenHeader.textContent) {
+      screenHeader.textContent = screenHeader.textContent?.slice(0, -1);
+    }
+  } else {
+    clearAll();
   }
 };
 
@@ -265,3 +310,5 @@ clearButton.addEventListener("click", handleClearScreen);
 plusMinusButton.addEventListener("click", handlePlusMinusButtonClick);
 squareButton.addEventListener("click", handleSquare);
 sqrtButton.addEventListener("click", handleSqrt);
+ranIntButton.addEventListener("click", handleRanInt);
+backspaceButton.addEventListener("click", handleBackspace);

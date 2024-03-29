@@ -18,6 +18,9 @@ const splitCalc = [
 const strCalc = splitCalc.join(" ");
 
 const myEval = (calcString) => {
+  if (calcString == "") {
+    return 0;
+  }
   let calcArr = calcString.split(" ");
   if (calcArr.length == 2) {
     return parseFloat(calcString);
