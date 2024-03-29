@@ -38,6 +38,10 @@ const ranIntButton: HTMLButtonElement = document.querySelector(
   "#button-container__button--ranInt"
 );
 
+const backspaceButton: HTMLButtonElement = document.querySelector(
+  "#button-container__button--backspace"
+);
+
 if (!numberButtons) {
   throw new Error("number button issue");
 } else if (!operationsButtons) {
@@ -58,6 +62,8 @@ if (!numberButtons) {
   throw new Error("squareRoot button issue");
 } else if (!ranIntButton) {
   throw new Error("ranInt button issue");
+} else if (!backspaceButton) {
+  throw new Error("backspace button issue");
 }
 
 //useful variables
@@ -280,6 +286,16 @@ const handleRanInt = () => {
   }
 };
 
+const handleBackspace = () => {
+  if (!hasEqualled) {
+    if (screenHeader.textContent) {
+      screenHeader.textContent = screenHeader.textContent?.slice(0, -1);
+    }
+  } else {
+    clearAll();
+  }
+};
+
 //eventListeners
 numberButtons.forEach((numberButton) => {
   numberButton.addEventListener("click", handleNumberClick);
@@ -295,3 +311,4 @@ plusMinusButton.addEventListener("click", handlePlusMinusButtonClick);
 squareButton.addEventListener("click", handleSquare);
 sqrtButton.addEventListener("click", handleSqrt);
 ranIntButton.addEventListener("click", handleRanInt);
+backspaceButton.addEventListener("click", handleBackspace);
