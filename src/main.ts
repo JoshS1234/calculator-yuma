@@ -34,6 +34,10 @@ const sqrtButton: HTMLButtonElement = document.querySelector(
   "#button-container__button--sqrt"
 );
 
+const percentageButton: HTMLButtonElement = document.querySelector(
+  "#button-container__button--percentage"
+);
+
 if (!numberButtons) {
   throw new Error("number button issue");
 } else if (!operationsButtons) {
@@ -52,6 +56,8 @@ if (!numberButtons) {
   throw new Error("square button issue");
 } else if (!sqrtButton) {
   throw new Error("squareRoot button issue");
+} else if (!percentageButton) {
+  throw new Error("percentage button issue");
 }
 
 //useful variables
@@ -127,9 +133,6 @@ const handleNumberClick = (e: Event) => {
     hasEqualled = false;
   }
 
-  // if (screenHeader.textContent == "-") {
-  // } else if (screenHeader.textContent == "+") {
-  // } else
   if (["+", "-", "*", "/"].includes(screenHeader.textContent)) {
     calculation.push(screenHeader.textContent);
     screenHeader.textContent = "";
@@ -225,21 +228,10 @@ const handleSqrt = (e: Event) => {
 };
 
 //eventListeners
-//setup objects to store buttons
-// const numberObj = {};
-// for (let numberButton of numberButtons) {
-//   numberButton.addEventListener("click", handleNumberClick);
-//   numberObj[numberButton.value] = numberButton;
-// }
 numberButtons.forEach((numberButton) => {
   numberButton.addEventListener("click", handleNumberClick);
 });
 
-// const operationObj = {};
-// for (let operationsButton of operationsButtons) {
-//   operationsButton.addEventListener("click", handleOperationClick);
-//   operationObj[operationsButton.value] = operationsButton;
-// }
 operationsButtons.forEach((operationButton) => {
   operationButton.addEventListener("click", handleOperationClick);
 });

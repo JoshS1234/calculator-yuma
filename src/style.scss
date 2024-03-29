@@ -24,7 +24,7 @@ body {
 
   .screen__output-header {
     color: white;
-    font-size: 1.4rem;
+    font-size: 2rem;
   }
 }
 
@@ -32,7 +32,7 @@ body {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(5, 1fr);
-  grid-template-areas: "clr plusMinus plusMinus divide" "seven eight nine mult" "four five six minus" "one two three plus" "nought squared sqrt equals";
+  grid-template-areas: "clr plusMinus percentage divide" "seven eight nine mult" "four five six minus" "one two three plus" "nought squared sqrt equals";
   // align-content: center;
   justify-items: center;
   width: 90%;
@@ -46,12 +46,15 @@ body {
     height: 100%;
     max-height: 100%;
     // border-radius: 50%;
-    background-color: rgb(29, 27, 27);
+    background-color: rgb(53, 50, 50);
     color: white;
-    font-size: 1.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    border-radius: 50%;
 
     &--operation {
       background-color: orange;
+      color: black;
     }
 
     &--number {
@@ -63,6 +66,10 @@ body {
 
   #button-container__button--plus {
     grid-area: plus;
+  }
+
+  #button-container__button--percentage {
+    grid-area: percentage;
   }
 
   #button-container__button--minus {
