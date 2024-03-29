@@ -88,13 +88,13 @@ const myEval = (calcString: string): number => {
   if (calcString == "" || calcString == "√") {
     return 0;
   }
-  let calcArr = calcString.split(" ");
+  let calcArr: (string | undefined)[] = calcString.split(" ");
   // if (calcArr.length == 2) {
   //   return parseFloat(calcString);
   // }
 
   //sorts through individual elements, looking for squares, square roots and negatives (or any combination of these)
-  calcArr = calcArr.map((element) => {
+  calcArr = calcArr.map((element: string) => {
     if (element[0] == "√" && element[1] == "-") {
       clearAll();
       alert("Maths error!!! cannot square root negative numbers");

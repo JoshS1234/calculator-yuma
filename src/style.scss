@@ -9,7 +9,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
 }
 
 .screen {
@@ -24,7 +23,7 @@ body {
 
   .screen__output-header {
     color: white;
-    font-size: 2rem;
+    font-size: 2r em;
   }
 }
 
@@ -36,21 +35,23 @@ body {
   // align-content: center;
   justify-items: center;
   width: 90%;
-  height: 50vh;
+  height: fit-content;
+  margin: 20px auto;
+  gap: 10px;
 
   .button-container__button {
-    // min-width: 50px;
+    min-width: 60px;
     width: 100%;
     max-width: 100%;
-    // min-height: 50px;
-    height: 100%;
-    max-height: 100%;
-    // border-radius: 50%;
+    min-height: 50px;
+    height: 12vw;
+    max-height: 80px;
     background-color: rgb(53, 50, 50);
     color: white;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: bold;
-    border-radius: 50%;
+    border-radius: calc(12vw);
+    border: 2px solid white;
 
     &--operation {
       background-color: orange;
@@ -70,7 +71,7 @@ body {
 
   #button-container__button--ran {
     grid-area: ran;
-    font-size: 1rem;
+    font-size: 3vw;
   }
 
   #button-container__button--minus {
@@ -136,6 +137,7 @@ body {
   #button-container__button--equals {
     grid-area: equals;
     border-radius: 5px;
+    font-size: 2rem;
   }
 
   #button-container__button--squared {
@@ -148,5 +150,31 @@ body {
 
   #button-container__button--backspace {
     grid-area: backspace;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .button-container {
+    width: 80%;
+    gap: 20px;
+
+    .button-container__button {
+      width: 100%;
+      max-width: 100%;
+      background-color: rgb(53, 50, 50);
+      font-size: 2rem;
+
+      &--operation {
+        background-color: orange;
+        color: black;
+      }
+    }
+    #button-container__button--ran {
+      font-size: 1.5rem;
+    }
+
+    #button-container__button--equals {
+      font-size: 2.5rem;
+    }
   }
 }
