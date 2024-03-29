@@ -31,7 +31,7 @@ body {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(5, 1fr);
-  grid-template-areas: "clr plusMinus percentage divide" "seven eight nine mult" "four five six minus" "one two three plus" "nought squared sqrt equals";
+  grid-template-areas: "clr plusMinus ranInt divide" "seven eight nine mult" "four five six minus" "one two three plus" "nought squared sqrt equals";
   justify-items: center;
   width: 90%;
   height: 50vh;
@@ -54,8 +54,9 @@ body {
 .button-container #button-container__button--plus {
   grid-area: plus;
 }
-.button-container #button-container__button--percentage {
-  grid-area: percentage;
+.button-container #button-container__button--ranInt {
+  grid-area: ranInt;
+  font-size: 1.5rem;
 }
 .button-container #button-container__button--minus {
   grid-area: minus;
