@@ -271,7 +271,8 @@ const handleRanInt = () => {
       screenHeader.textContent = randomIntString;
     } else if (["+", "-", "*", "/"].includes(screenHeader.textContent)) {
       calculation.push(screenHeader.textContent);
-      screenHeader.textContent = "";
+      screenHeader2.textContent = calculation.join(" ");
+      screenHeader.textContent = randomIntString;
     } else if (screenHeader.textContent == "√") {
       screenHeader.textContent += target.value;
       screenHeader2.textContent = calculation.join(" ");
