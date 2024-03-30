@@ -34,10 +34,10 @@
 
   .screen__output-header {
     color: $main-writing-color;
-    font-size: 2r em;
+    font-size: 1.4rem;
 
     &--light {
-      color: black;
+      color: $dark-purple-writing;
     }
   }
 }
@@ -196,7 +196,7 @@ footer {
 
     &--light {
       background-color: rgb(253, 202, 255);
-      color: rgb(135, 0, 161);
+      color: $dark-purple-writing;
     }
   }
 }

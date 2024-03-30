@@ -31,10 +31,10 @@
 }
 .screen .screen__output-header {
   color: white;
-  font-size: 2r em;
+  font-size: 1.4rem;
 }
 .screen .screen__output-header--light {
-  color: black;
+  color: rgb(135, 0, 161);
 }
 
 .button-container {
