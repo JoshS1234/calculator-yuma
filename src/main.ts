@@ -354,7 +354,7 @@ const handleSqrt = (e: Event) => {
 const handleRan = () => {
   //creates a random number from 0 to 1
 
-  const randomIntString = Math.random().toString();
+  const randomIntString = Math.random().toFixed(5).toString();
   //if there is an answer on screen, wipe and start with random number
   if (hasEqualled) {
     clearAll();
@@ -421,42 +421,6 @@ const handleLightMode = () => {
     });
     lightMode = false;
   }
-
-  // if (body?.classList.contains("main-body--light")) {
-  //   body?.classList.remove("main-body--light");
-  // } else {
-  //   body?.classList.add("main-body--light");
-  // }
-
-  // screenBackground.forEach((screen) => {
-  //   if (screen?.classList.contains("screen--light")) {
-  //     screen?.classList.remove("screen--light");
-  //   } else {
-  //     screen?.classList.add("screen--light");
-  //   }
-  // });
-
-  // if (screenHeader?.classList.contains("screen--light")) {
-  //   screenHeader?.classList.remove("screen--light");
-  // } else {
-  //   screenHeader?.classList.add("screen--light");
-  // }
-
-  // if (screenHeader2?.classList.contains("screen--light")) {
-  //   screenHeader2?.classList.remove("screen--light");
-  // } else {
-  //   screenHeader2?.classList.add("screen--light");
-  // }
-
-  // const mostButtons = document.querySelectorAll(".button-container__button");
-
-  // mostButtons.forEach((button) => {
-  //   if (button?.classList.contains("button-container__button--light")) {
-  //     button?.classList.remove("button-container__button--light");
-  //   } else {
-  //     button?.classList.add("button-container__button--light");
-  //   }
-  // });
 };
 
 //eventListeners
