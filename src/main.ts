@@ -396,8 +396,8 @@ const handleLightMode = () => {
 
   if (!lightMode) {
     body?.classList.add("main-body--light");
-    screenHeader?.classList.add("screen--light");
-    screenHeader2?.classList.add("screen--light");
+    screenHeader?.classList.add("screen__output-header--light");
+    screenHeader2?.classList.add("screen__output-header--light");
     footerTitle?.classList.add("footer__title--light");
     lightModeButton?.classList.add("footer__light-mode-button--light");
     mostButtons.forEach((button) => {
