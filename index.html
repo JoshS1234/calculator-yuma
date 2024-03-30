@@ -6,12 +6,18 @@
     <link rel="stylesheet" href="./src/style.css" />
     <title>Josh - Calculator</title>
   </head>
-  <body>
+  <body class="main-body">
     <div class="screen">
-      <h1 class="screen__output-header screen__output-header--1"></h1>
+      <h1
+        class="screen__output-header screen__output-header--light"
+        id="screen__output-header-1"
+      ></h1>
     </div>
     <div class="screen">
-      <h1 class="screen__output-header screen__output-header--2"></h1>
+      <h1
+        class="screen__output-header screen__output-header--light"
+        id="screen__output-header-2"
+      ></h1>
     </div>
     <div class="button-container">
       <input
@@ -147,15 +153,10 @@
     <footer>
       <input
         type="button"
-        class="footer__light-mode-button"
+        class="footer__light-mode-button footer__light-mode-button--light"
         value="light mode"
       />
-      <h1 class="footer__title">Nology calculator</h1>
-      <input
-        type="button"
-        class="footer__calc-screen-button"
-        value="screen color"
-      />
+      <h1 class="footer__title footer__title--light">Calcul8</h1>
     </footer>
 
     <script type="module" src="/src/main.ts"></script>

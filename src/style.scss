@@ -6,12 +6,16 @@
   box-sizing: border-box;
 }
 
-body {
+.main-body {
   background-color: $main-background-color;
   display: flex;
   flex-direction: column;
   align-items: center;
   font-family: $main-font;
+
+  &--light {
+    background-color: $main-background-color-light;
+  }
 }
 
 .screen {
@@ -24,9 +28,17 @@ body {
   align-items: flex-start;
   margin-top: 2.5vh;
 
+  &--light {
+    background-color: rgb(188, 255, 186);
+  }
+
   .screen__output-header {
     color: $main-writing-color;
     font-size: 2r em;
+
+    &--light {
+      color: black;
+    }
   }
 }
 
@@ -56,6 +68,10 @@ body {
     border: 2px solid white;
     font-family: $main-font;
 
+    &--light {
+      background-color: rgb(253, 202, 255);
+      color: rgb(135, 0, 161);
+    }
     &--operation {
       background-color: $operation-button-background-color;
       color: $operation-button-font-color;
@@ -160,6 +176,27 @@ footer {
     color: $main-writing-color;
     font-family: $logo-font;
     font-size: min(10vw, 40px);
+
+    &--light {
+      color: black;
+    }
+  }
+
+  .footer__light-mode-button {
+    min-width: 60px;
+    width: 30%;
+    max-width: 30%;
+    background-color: $general-button-color;
+    color: $main-writing-color;
+    font-size: 0.9rem;
+    border-radius: 10px;
+    border: 2px solid white;
+    font-family: $main-font;
+
+    &--light {
+      background-color: rgb(253, 202, 255);
+      color: rgb(135, 0, 161);
+    }
   }
 }
 

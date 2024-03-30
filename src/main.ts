@@ -8,11 +8,11 @@ const operationsButtons = document.querySelectorAll(
 );
 
 const screenHeader: HTMLHeadingElement = document.querySelector(
-  ".screen__output-header--1"
+  "#screen__output-header-1"
 );
 
 const screenHeader2: HTMLHeadingElement = document.querySelector(
-  ".screen__output-header--2"
+  "#screen__output-header-2"
 );
 
 const equalsButton: HTMLButtonElement = document.querySelector(
@@ -47,9 +47,9 @@ const lightModeButton: HTMLButtonElement = document.querySelector(
   ".footer__light-mode-button"
 );
 
-const calcScreenButton: HTMLButtonElement = document.querySelector(
-  ".footer__calc-screen-button"
-);
+const body = document.querySelector(".main-body");
+const screenBackground = document.querySelectorAll(".screen");
+const footerTitle = document.querySelector(".footer__title");
 
 //error handling with button imports from HTML
 if (!numberButtons) {
@@ -76,8 +76,10 @@ if (!numberButtons) {
   throw new Error("backspace button issue");
 } else if (!lightModeButton) {
   throw new Error("light mode button issue");
-} else if (!calcScreenButton) {
-  throw new Error("calc screen mode button issue");
+} else if (!body) {
+  throw new Error("body issue");
+} else if (!screenBackground) {
+  throw new Error("screen issue");
 }
 
 //useful variables
@@ -85,6 +87,8 @@ if (!numberButtons) {
 let calculation: string[] = [];
 //hasEqualled keeps track of whether an answer is showing
 let hasEqualled = false;
+//sets theme
+let lightMode = false;
 //wipes the screen, calculation and starts a new calculation
 const clearAll = () => {
   screenHeader.textContent = "";
@@ -387,6 +391,71 @@ const handleBackspace = () => {
 
 const handleLightMode = () => {
   console.log("light mode");
+  const mostButtons = document.querySelectorAll(".button-container__button");
+
+  if (!lightMode) {
+    body?.classList.add("main-body--light");
+    screenHeader?.classList.add("screen--light");
+    screenHeader2?.classList.add("screen--light");
+    footerTitle?.classList.add("footer__title--light");
+    lightModeButton?.classList.add("footer__light-mode-button--light");
+    mostButtons.forEach((button) => {
+      button?.classList.add("button-container__button--light");
+    });
+    screenBackground.forEach((screen) => {
+      screen?.classList.add("screen--light");
+    });
+    lightMode = true;
+  } else {
+    body?.classList.remove("main-body--light");
+    screenHeader?.classList.remove("screen--light");
+    screenHeader2?.classList.remove("screen--light");
+    footerTitle?.classList.remove("footer__title--light");
+    lightModeButton?.classList.remove("footer__light-mode-button--light");
+    mostButtons.forEach((button) => {
+      button?.classList.remove("button-container__button--light");
+    });
+    screenBackground.forEach((screen) => {
+      screen?.classList.remove("screen--light");
+    });
+    lightMode = false;
+  }
+
+  // if (body?.classList.contains("main-body--light")) {
+  //   body?.classList.remove("main-body--light");
+  // } else {
+  //   body?.classList.add("main-body--light");
+  // }
+
+  // screenBackground.forEach((screen) => {
+  //   if (screen?.classList.contains("screen--light")) {
+  //     screen?.classList.remove("screen--light");
+  //   } else {
+  //     screen?.classList.add("screen--light");
+  //   }
+  // });
+
+  // if (screenHeader?.classList.contains("screen--light")) {
+  //   screenHeader?.classList.remove("screen--light");
+  // } else {
+  //   screenHeader?.classList.add("screen--light");
+  // }
+
+  // if (screenHeader2?.classList.contains("screen--light")) {
+  //   screenHeader2?.classList.remove("screen--light");
+  // } else {
+  //   screenHeader2?.classList.add("screen--light");
+  // }
+
+  // const mostButtons = document.querySelectorAll(".button-container__button");
+
+  // mostButtons.forEach((button) => {
+  //   if (button?.classList.contains("button-container__button--light")) {
+  //     button?.classList.remove("button-container__button--light");
+  //   } else {
+  //     button?.classList.add("button-container__button--light");
+  //   }
+  // });
 };
 
 //eventListeners
