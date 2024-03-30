@@ -309,6 +309,8 @@ const handleSquare = (e: Event) => {
     //adds square symbol if it is not present
     else if (/-?√?[0-9]/.test(screenHeader.textContent)) {
       screenHeader.textContent = screenHeader.textContent + "²";
+    } else if (screenHeader.textContent == "") {
+      alert("Need to type a number first, then square");
     } else {
       alert("issue with square, edge case");
     }
@@ -336,7 +338,7 @@ const handleSqrt = (e: Event) => {
     }
     //if it is empty, starts with a sqrt
     else if (screenHeader.textContent == "") {
-      screenHeader.textContent = "√";
+      alert("Need to type a number first, then square root");
     }
     //if it is an operator, replaces it with sqrt
     else if (["+", "-", "*", "/"].includes(screenHeader.textContent)) {
@@ -390,7 +392,6 @@ const handleBackspace = () => {
 };
 
 const handleLightMode = () => {
-  console.log("light mode");
   const mostButtons = document.querySelectorAll(".button-container__button");
 
   if (!lightMode) {
