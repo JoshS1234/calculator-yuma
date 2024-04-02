@@ -19,22 +19,29 @@
 }
 
 .screen {
-  width: 90%;
+  width: 95%;
   height: 10vh;
   background-color: $calculator-screen-color;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  align-items: flex-start;
+  align-items: center;
   margin-top: 2.5vh;
+  word-wrap: break-word;
+  box-shadow: 4px 4px 8px rgba(248, 246, 246, 0.3);
 
   &--light {
     background-color: $calculator-screen-color-light;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
   }
 
   .screen__output-header {
     color: $main-writing-color;
     font-size: 1.4rem;
+    height: fit-content;
+    text-wrap: wrap;
+    word-wrap: break-word;
+    width: 90%;
 
     &--light {
       color: $main-writing-color-light;
@@ -81,10 +88,12 @@
       border-radius: calc(12vw);
       border: 2px solid white;
       font-family: $main-font;
+      box-shadow: 4px 4px 8px rgba(248, 246, 246, 0.3);
 
       &--light {
         background-color: $general-button-color-light;
         color: rgb(135, 0, 161);
+        box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
       }
       &--operation {
         background-color: $operation-button-background-color;
@@ -199,7 +208,7 @@ footer {
   }
 
   .footer__light-mode-button {
-    min-width: 60px;
+    min-width: 90px;
     width: 30%;
     max-width: 30%;
     background-color: $general-button-color;
@@ -208,10 +217,12 @@ footer {
     border-radius: 10px;
     border: 2px solid white;
     font-family: $main-font;
+    box-shadow: 4px 4px 8px rgba(248, 246, 246, 0.3);
 
     &--light {
       background-color: $general-button-color-light;
       color: $main-writing-color-light;
+      box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
     }
   }
 }

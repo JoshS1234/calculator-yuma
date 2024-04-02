@@ -205,6 +205,16 @@ const handleNumberClick = (e: Event) => {
   if (screenHeader.textContent == null) {
     screenHeader.textContent = "";
   }
+  if (screenHeader2.textContent == null) {
+    screenHeader2.textContent = "";
+  }
+
+  if (
+    screenHeader.textContent.length > 7 ||
+    screenHeader.textContent.length + screenHeader2.textContent.length > 15
+  ) {
+    return;
+  }
 
   //if there is an operator, push it to the calculation array and keep this number in storage
   if (["+", "-", "*", "/"].includes(screenHeader.textContent)) {
@@ -325,8 +335,15 @@ const handleSquare = () => {
 
   //if there is an answer already, squares the answer as the first step of a new calculation
   if (hasEqualled) {
-    screenHeader.textContent = screenHeader2.textContent + "²";
-    screenHeader2.textContent = myEval(screenHeader.textContent).toString();
+    if (screenHeader.textContent[0] == "-") {
+      screenHeader.textContent = screenHeader2.textContent?.slice(1) + "²";
+
+      screenHeader2.textContent = myEval(screenHeader.textContent).toString();
+      screenHeader.textContent = "";
+    } else {
+      screenHeader.textContent = screenHeader2.textContent + "²";
+      screenHeader2.textContent = myEval(screenHeader.textContent).toString();
+    }
   }
   //if it is partway through a calculation, square the value in the top screen
   else {
@@ -448,8 +465,8 @@ const handleLightMode = () => {
     lightMode = true;
   } else {
     body?.classList.remove("main-body--light");
-    screenHeader?.classList.remove("screen--light");
-    screenHeader2?.classList.remove("screen--light");
+    screenHeader?.classList.remove("screen__output-header--light");
+    screenHeader2?.classList.remove("screen__output-header--light");
     footerTitle?.classList.remove("footer__title--light");
     lightModeButton?.classList.remove("footer__light-mode-button--light");
     mostButtons.forEach((button) => {
