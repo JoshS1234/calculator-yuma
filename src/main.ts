@@ -237,9 +237,11 @@ const handleOperationClick = (e: Event) => {
       return;
     }
   }
-  //operators will overwrite each other
-  else if (["+", "-", "*", "/", "√"].includes(screenHeader.textContent)) {
+  //main operators will overwrite each other
+  else if (["+", "-", "*", "/"].includes(screenHeader.textContent)) {
     screenHeader.textContent = target.value;
+    return;
+  } else if (screenHeader.textContent == "√") {
     return;
   }
   //if it is a number then push the number to the calculation array
@@ -355,7 +357,7 @@ const handleSqrt = () => {
         .filter((element) => element != "√")
         .join("");
     }
-    //if it is a positive or negative number, adds sqrt at the start (myEval is set to handle square roots of negatives)
+    //if it is a positive or negative number, adds sqrt at the start (myEval is able to handle square roots of negatives)
     else if (/-?[0-9]+/.test(screenHeader.textContent)) {
       screenHeader.textContent = "√" + screenHeader.textContent;
     }
@@ -365,9 +367,7 @@ const handleSqrt = () => {
     }
     //if it is an operator, replaces it with sqrt
     else if (["+", "-", "*", "/"].includes(screenHeader.textContent)) {
-      calculation.push(screenHeader.textContent);
-      screenHeader2.textContent = calculation.join(" ");
-      screenHeader.textContent = "√";
+      alert("Need to type a number first, then square root");
     } else {
       alert("Issue with sqrt, edge case");
     }
