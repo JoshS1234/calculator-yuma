@@ -7,45 +7,45 @@ const operationsButtons = document.querySelectorAll(
   ".button-container__button--operation"
 );
 
-const screenHeader: HTMLHeadingElement = document.querySelector(
+const screenHeader = document.querySelector(
   "#screen__output-header-1"
-);
+) as HTMLHeadingElement;
 
-const screenHeader2: HTMLHeadingElement = document.querySelector(
+const screenHeader2 = document.querySelector(
   "#screen__output-header-2"
-);
+) as HTMLHeadingElement;
 
-const equalsButton: HTMLButtonElement = document.querySelector(
+const equalsButton = document.querySelector(
   "#button-container__button--equals"
-);
+) as HTMLButtonElement;
 
-const clearButton: HTMLButtonElement = document.querySelector(
+const clearButton = document.querySelector(
   "#button-container__button--clear"
-);
+) as HTMLButtonElement;
 
-const plusMinusButton: HTMLButtonElement = document.querySelector(
+const plusMinusButton = document.querySelector(
   "#button-container__button--plusMinus"
-);
+) as HTMLButtonElement;
 
-const squareButton: HTMLButtonElement = document.querySelector(
+const squareButton = document.querySelector(
   "#button-container__button--square"
-);
+) as HTMLButtonElement;
 
-const sqrtButton: HTMLButtonElement = document.querySelector(
+const sqrtButton = document.querySelector(
   "#button-container__button--sqrt"
-);
+) as HTMLButtonElement;
 
-const ranButton: HTMLButtonElement = document.querySelector(
+const ranButton = document.querySelector(
   "#button-container__button--ran"
-);
+) as HTMLButtonElement;
 
-const backspaceButton: HTMLButtonElement = document.querySelector(
+const backspaceButton = document.querySelector(
   "#button-container__button--backspace"
-);
+) as HTMLButtonElement;
 
-const lightModeButton: HTMLButtonElement = document.querySelector(
+const lightModeButton = document.querySelector(
   ".footer__light-mode-button"
-);
+) as HTMLButtonElement;
 
 const body = document.querySelector(".main-body");
 const screenBackground = document.querySelectorAll(".screen");
@@ -104,7 +104,7 @@ const myEval = (calcString: string): number => {
   if (calcString == "" || calcString == "√") {
     return 0;
   }
-  let calcArr: (string | undefined)[] = calcString.split(" ");
+  let calcArr: string[] = calcString.split(" ");
   // if (calcArr.length == 2) {
   //   return parseFloat(calcString);
   // }
@@ -137,7 +137,7 @@ const myEval = (calcString: string): number => {
         return element;
       }
     }
-  });
+  }) as string[];
   //returns single step calculations (eg: square, square root, negatives)
   if (calcArr.length == 1) {
     return parseFloat(calcArr[0]);
@@ -195,6 +195,10 @@ const handleNumberClick = (e: Event) => {
     hasEqualled = false;
   }
 
+  if (screenHeader.textContent == null) {
+    screenHeader.textContent = "";
+  }
+
   //if there is an operator, push it to the calculation array and keep this number in storage
   if (["+", "-", "*", "/"].includes(screenHeader.textContent)) {
     calculation.push(screenHeader.textContent);
@@ -233,9 +237,11 @@ const handleOperationClick = (e: Event) => {
       return;
     }
   }
-  //operators will overwrite each other
-  else if (["+", "-", "*", "/", "√"].includes(screenHeader.textContent)) {
+  //main operators will overwrite each other
+  else if (["+", "-", "*", "/"].includes(screenHeader.textContent)) {
     screenHeader.textContent = target.value;
+    return;
+  } else if (screenHeader.textContent == "√") {
     return;
   }
   //if it is a number then push the number to the calculation array
@@ -248,7 +254,11 @@ const handleOperationClick = (e: Event) => {
   }
 };
 
-const handleEqualsClick = (e: Event) => {
+const handleEqualsClick = () => {
+  if (screenHeader.textContent == null) {
+    screenHeader.textContent = "";
+  }
+
   if (!hasEqualled) {
     //if there is just a hanging operator, just ignore it and do the rest of the calculation
     if (!["+", "-", "*", "/", "√"].includes(screenHeader.textContent)) {
@@ -258,7 +268,7 @@ const handleEqualsClick = (e: Event) => {
 
     //collect together the calculation from the array, then pass to myEval to calculate
     const fullQuestion = calculation.join(" ");
-    const answer = myEval(fullQuestion);
+    const answer = myEval(fullQuestion).toString();
     screenHeader.textContent = `${fullQuestion + " = "}`;
     calculation.push("=");
     calculation.push(answer);
@@ -267,12 +277,19 @@ const handleEqualsClick = (e: Event) => {
   }
 };
 
-const handleClearScreen = (e: Event) => {
+const handleClearScreen = () => {
   //wipes out both screens, calculation array, and hasEqualled
   clearAll();
 };
 
-const handlePlusMinusButtonClick = (e: Event) => {
+const handlePlusMinusButtonClick = () => {
+  if (screenHeader.textContent == null) {
+    screenHeader.textContent = "";
+  }
+  if (screenHeader2.textContent == null) {
+    screenHeader2.textContent = "";
+  }
+
   //flips the sign of a number in the storage screen
   if (!hasEqualled) {
     if (/^√?[0-9]/.test(screenHeader.textContent)) {
@@ -292,13 +309,17 @@ const handlePlusMinusButtonClick = (e: Event) => {
   }
 };
 
-const handleSquare = (e: Event) => {
+const handleSquare = () => {
+  if (screenHeader.textContent == null) {
+    screenHeader.textContent = "";
+  }
+
   const currentNumber = screenHeader.textContent;
 
   //if there is an answer already, squares the answer as the first step of a new calculation
   if (hasEqualled) {
     screenHeader.textContent = screenHeader2.textContent + "²";
-    screenHeader2.textContent = myEval(screenHeader.textContent);
+    screenHeader2.textContent = myEval(screenHeader.textContent).toString();
   }
   //if it is partway through a calculation, square the value in the top screen
   else {
@@ -317,11 +338,15 @@ const handleSquare = (e: Event) => {
   }
 };
 
-const handleSqrt = (e: Event) => {
+const handleSqrt = () => {
+  if (screenHeader.textContent == null) {
+    screenHeader.textContent = "";
+  }
+
   //if there is an answer already, begins new calculation with square root of answer
   if (hasEqualled) {
     screenHeader.textContent = "√" + screenHeader2.textContent;
-    screenHeader2.textContent = myEval(screenHeader.textContent);
+    screenHeader2.textContent = myEval(screenHeader.textContent).toString();
   }
   //if partway through a calculation, adds sqrt at the start of the line
   else {
@@ -332,7 +357,7 @@ const handleSqrt = (e: Event) => {
         .filter((element) => element != "√")
         .join("");
     }
-    //if it is a positive or negative number, adds sqrt at the start (myEval is set to handle square roots of negatives)
+    //if it is a positive or negative number, adds sqrt at the start (myEval is able to handle square roots of negatives)
     else if (/-?[0-9]+/.test(screenHeader.textContent)) {
       screenHeader.textContent = "√" + screenHeader.textContent;
     }
@@ -342,9 +367,7 @@ const handleSqrt = (e: Event) => {
     }
     //if it is an operator, replaces it with sqrt
     else if (["+", "-", "*", "/"].includes(screenHeader.textContent)) {
-      calculation.push(screenHeader.textContent);
-      screenHeader2.textContent = calculation.join(" ");
-      screenHeader.textContent = "√";
+      alert("Need to type a number first, then square root");
     } else {
       alert("Issue with sqrt, edge case");
     }
@@ -352,6 +375,10 @@ const handleSqrt = (e: Event) => {
 };
 
 const handleRan = () => {
+  if (screenHeader.textContent == null) {
+    screenHeader.textContent = "";
+  }
+
   //creates a random number from 0 to 1
 
   const randomIntString = Math.random().toFixed(5).toString();
@@ -373,7 +400,7 @@ const handleRan = () => {
       screenHeader2.textContent = calculation.join(" ");
       screenHeader.textContent = randomIntString;
     } else if (screenHeader.textContent == "√") {
-      screenHeader.textContent += target.value;
+      screenHeader.textContent += randomIntString;
       screenHeader2.textContent = calculation.join(" ");
     } else {
       alert("issue with random number, edge case");
