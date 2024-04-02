@@ -1,14 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Tauri&display=swap");
 
-// colours
-$main-background-color: black;
-$main-background-color-light: rgb(220, 182, 231);
-$main-writing-color: white;
-$calculator-screen-color: rgb(0, 71, 0);
+// colours (both themes)
 $operation-button-background-color: orange;
 $operation-button-font-color: black;
+
+//dark mode
+$main-background-color: black;
+$main-writing-color: white;
+$calculator-screen-color: rgb(0, 71, 0);
 $general-button-color: rgb(53, 50, 50);
-$dark-purple-writing: rgb(135, 0, 161);
+$sidebar-color: rgb(128, 128, 128);
+
+//light mode
+$main-background-color-light: rgb(220, 182, 231);
+$main-writing-color-light: rgb(135, 0, 161);
+$calculator-screen-color-light: rgb(188, 255, 186);
+$general-button-color-light: rgb(253, 202, 255);
+$sidebar-color-light: rgb(226, 0, 226);
 
 //fonts
 $logo-font: "Dancing Script", sans-serif;

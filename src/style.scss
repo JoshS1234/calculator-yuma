@@ -29,7 +29,7 @@
   margin-top: 2.5vh;
 
   &--light {
-    background-color: rgb(188, 255, 186);
+    background-color: $calculator-screen-color-light;
   }
 
   .screen__output-header {
@@ -37,132 +37,147 @@
     font-size: 1.4rem;
 
     &--light {
-      color: $dark-purple-writing;
+      color: $main-writing-color-light;
     }
   }
 }
 
-.button-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(6, 1fr);
-  grid-template-areas: "clr backspace ran divide" "seven eight nine mult" "four five six minus" "one two three plus" "nought squared sqrt plusMinus" "equals equals equals equals";
-  justify-items: center;
-  width: 90%;
-  height: fit-content;
-  margin: 20px auto;
-  gap: 10px;
+.buttons-and-shapes {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
 
-  .button-container__button {
-    min-width: 60px;
-    width: 100%;
-    max-width: 100%;
-    min-height: 50px;
-    height: 12vw;
-    max-height: 80px;
-    background-color: $general-button-color;
-    color: $main-writing-color;
-    font-size: 2rem;
-    font-weight: bold;
-    border-radius: calc(12vw);
-    border: 2px solid white;
-    font-family: $main-font;
+  .header-shape1 {
+    display: none;
+  }
 
-    &--light {
-      background-color: rgb(253, 202, 255);
-      color: rgb(135, 0, 161);
+  .header-shape2 {
+    display: none;
+  }
+
+  .button-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    grid-template-areas: "clr backspace ran divide" "seven eight nine mult" "four five six minus" "one two three plus" "nought squared sqrt plusMinus" "equals equals equals equals";
+    justify-items: center;
+    width: 90%;
+    min-height: 500px;
+    height: fit-content;
+    margin: 20px auto;
+    gap: 10px;
+
+    .button-container__button {
+      min-width: 60px;
+      width: 100%;
+      max-width: 100%;
+      min-height: 70px;
+      height: 12vw;
+      max-height: 80px;
+      background-color: $general-button-color;
+      color: $main-writing-color;
+      font-size: 2rem;
+      font-weight: bold;
+      border-radius: calc(12vw);
+      border: 2px solid white;
+      font-family: $main-font;
+
+      &--light {
+        background-color: $general-button-color-light;
+        color: rgb(135, 0, 161);
+      }
+      &--operation {
+        background-color: $operation-button-background-color;
+        color: $operation-button-font-color;
+      }
     }
-    &--operation {
-      background-color: $operation-button-background-color;
-      color: $operation-button-font-color;
+
+    #button-container__button--plus {
+      grid-area: plus;
     }
-  }
 
-  #button-container__button--plus {
-    grid-area: plus;
-  }
+    #button-container__button--ran {
+      grid-area: ran;
+      font-size: 3vw;
+    }
 
-  #button-container__button--ran {
-    grid-area: ran;
-    font-size: 3vw;
-  }
+    #button-container__button--minus {
+      grid-area: minus;
+    }
 
-  #button-container__button--minus {
-    grid-area: minus;
-  }
+    #button-container__button--multiply {
+      grid-area: mult;
+    }
 
-  #button-container__button--multiply {
-    grid-area: mult;
-  }
+    #button-container__button--divide {
+      grid-area: divide;
+    }
 
-  #button-container__button--divide {
-    grid-area: divide;
-  }
+    #button-container__button--0 {
+      grid-area: nought;
+    }
 
-  #button-container__button--0 {
-    grid-area: nought;
-  }
+    #button-container__button--1 {
+      grid-area: one;
+    }
 
-  #button-container__button--1 {
-    grid-area: one;
-  }
+    #button-container__button--2 {
+      grid-area: two;
+    }
 
-  #button-container__button--2 {
-    grid-area: two;
-  }
+    #button-container__button--3 {
+      grid-area: three;
+    }
 
-  #button-container__button--3 {
-    grid-area: three;
-  }
+    #button-container__button--4 {
+      grid-area: four;
+    }
 
-  #button-container__button--4 {
-    grid-area: four;
-  }
+    #button-container__button--5 {
+      grid-area: five;
+    }
 
-  #button-container__button--5 {
-    grid-area: five;
-  }
+    #button-container__button--6 {
+      grid-area: six;
+    }
 
-  #button-container__button--6 {
-    grid-area: six;
-  }
+    #button-container__button--7 {
+      grid-area: seven;
+    }
 
-  #button-container__button--7 {
-    grid-area: seven;
-  }
+    #button-container__button--8 {
+      grid-area: eight;
+    }
 
-  #button-container__button--8 {
-    grid-area: eight;
-  }
+    #button-container__button--9 {
+      grid-area: nine;
+    }
 
-  #button-container__button--9 {
-    grid-area: nine;
-  }
+    #button-container__button--plusMinus {
+      grid-area: plusMinus;
+    }
 
-  #button-container__button--plusMinus {
-    grid-area: plusMinus;
-  }
+    #button-container__button--clear {
+      grid-area: clr;
+    }
 
-  #button-container__button--clear {
-    grid-area: clr;
-  }
+    #button-container__button--equals {
+      grid-area: equals;
+      border-radius: 5px;
+      font-size: 2rem;
+    }
 
-  #button-container__button--equals {
-    grid-area: equals;
-    border-radius: 5px;
-    font-size: 2rem;
-  }
+    #button-container__button--squared {
+      grid-area: squared;
+    }
 
-  #button-container__button--squared {
-    grid-area: squared;
-  }
+    #button-container__button--sqrt {
+      grid-area: sqrt;
+    }
 
-  #button-container__button--sqrt {
-    grid-area: sqrt;
-  }
-
-  #button-container__button--backspace {
-    grid-area: backspace;
+    #button-container__button--backspace {
+      grid-area: backspace;
+    }
   }
 }
 
@@ -179,7 +194,7 @@ footer {
     font-size: min(10vw, 40px);
 
     &--light {
-      color: rgb(135, 0, 161);
+      color: $main-writing-color-light;
     }
   }
 
@@ -195,27 +210,57 @@ footer {
     font-family: $main-font;
 
     &--light {
-      background-color: rgb(253, 202, 255);
-      color: $dark-purple-writing;
+      background-color: $general-button-color-light;
+      color: $main-writing-color-light;
     }
   }
 }
 
 @media screen and (min-width: 768px) {
-  .button-container {
-    max-width: 800px;
+  .buttons-and-shapes {
+    .side-shape {
+      display: flex;
+      border-top: 200px solid transparent;
+      margin-top: 20px;
+      margin-bottom: 20px;
 
-    .button-container__button {
-      width: 100%;
-      max-width: 100%;
-      font-size: 2rem;
+      &--light {
+        background-color: $sidebar-color-light;
+        border-color: $main-background-color-light;
+      }
     }
-    #button-container__button--ran {
-      font-size: 1.5rem;
+    .side-shape--1 {
+      border-left: calc(3 * (100vw - 800px) / 8) solid $sidebar-color;
+      margin-right: calc((100vw - 800px) / 8);
+
+      &--light {
+        border-left: calc(3 * (100vw - 800px) / 8) solid $sidebar-color-light;
+      }
     }
 
-    #button-container__button--equals {
-      font-size: 2.5rem;
+    .side-shape--2 {
+      border-right: calc(3 * (100vw - 800px) / 8) solid $sidebar-color;
+      margin-left: calc((100vw - 800px) / 8);
+      &--light {
+        border-right: calc(3 * (100vw - 800px) / 8) solid $sidebar-color-light;
+      }
+    }
+
+    .button-container {
+      max-width: 800px;
+
+      .button-container__button {
+        width: 100%;
+        max-width: 100%;
+        font-size: 2rem;
+      }
+      #button-container__button--ran {
+        font-size: 1.5rem;
+      }
+
+      #button-container__button--equals {
+        font-size: 2.5rem;
+      }
     }
   }
 }

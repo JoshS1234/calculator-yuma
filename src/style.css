@@ -37,23 +37,35 @@
   color: rgb(135, 0, 161);
 }
 
-.button-container {
+.buttons-and-shapes {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.buttons-and-shapes .header-shape1 {
+  display: none;
+}
+.buttons-and-shapes .header-shape2 {
+  display: none;
+}
+.buttons-and-shapes .button-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(6, 1fr);
   grid-template-areas: "clr backspace ran divide" "seven eight nine mult" "four five six minus" "one two three plus" "nought squared sqrt plusMinus" "equals equals equals equals";
   justify-items: center;
   width: 90%;
+  min-height: 500px;
   height: -moz-fit-content;
   height: fit-content;
   margin: 20px auto;
   gap: 10px;
 }
-.button-container .button-container__button {
+.buttons-and-shapes .button-container .button-container__button {
   min-width: 60px;
   width: 100%;
   max-width: 100%;
-  min-height: 50px;
+  min-height: 70px;
   height: 12vw;
   max-height: 80px;
   background-color: rgb(53, 50, 50);
@@ -64,78 +76,78 @@
   border: 2px solid white;
   font-family: "Tauri", Arial, Helvetica, sans-serif;
 }
-.button-container .button-container__button--light {
+.buttons-and-shapes .button-container .button-container__button--light {
   background-color: rgb(253, 202, 255);
   color: rgb(135, 0, 161);
 }
-.button-container .button-container__button--operation {
+.buttons-and-shapes .button-container .button-container__button--operation {
   background-color: orange;
   color: black;
 }
-.button-container #button-container__button--plus {
+.buttons-and-shapes .button-container #button-container__button--plus {
   grid-area: plus;
 }
-.button-container #button-container__button--ran {
+.buttons-and-shapes .button-container #button-container__button--ran {
   grid-area: ran;
   font-size: 3vw;
 }
-.button-container #button-container__button--minus {
+.buttons-and-shapes .button-container #button-container__button--minus {
   grid-area: minus;
 }
-.button-container #button-container__button--multiply {
+.buttons-and-shapes .button-container #button-container__button--multiply {
   grid-area: mult;
 }
-.button-container #button-container__button--divide {
+.buttons-and-shapes .button-container #button-container__button--divide {
   grid-area: divide;
 }
-.button-container #button-container__button--0 {
+.buttons-and-shapes .button-container #button-container__button--0 {
   grid-area: nought;
 }
-.button-container #button-container__button--1 {
+.buttons-and-shapes .button-container #button-container__button--1 {
   grid-area: one;
 }
-.button-container #button-container__button--2 {
+.buttons-and-shapes .button-container #button-container__button--2 {
   grid-area: two;
 }
-.button-container #button-container__button--3 {
+.buttons-and-shapes .button-container #button-container__button--3 {
   grid-area: three;
 }
-.button-container #button-container__button--4 {
+.buttons-and-shapes .button-container #button-container__button--4 {
   grid-area: four;
 }
-.button-container #button-container__button--5 {
+.buttons-and-shapes .button-container #button-container__button--5 {
   grid-area: five;
 }
-.button-container #button-container__button--6 {
+.buttons-and-shapes .button-container #button-container__button--6 {
   grid-area: six;
 }
-.button-container #button-container__button--7 {
+.buttons-and-shapes .button-container #button-container__button--7 {
   grid-area: seven;
 }
-.button-container #button-container__button--8 {
+.buttons-and-shapes .button-container #button-container__button--8 {
   grid-area: eight;
 }
-.button-container #button-container__button--9 {
+.buttons-and-shapes .button-container #button-container__button--9 {
   grid-area: nine;
 }
-.button-container #button-container__button--plusMinus {
+.buttons-and-shapes .button-container #button-container__button--plusMinus {
   grid-area: plusMinus;
 }
-.button-container #button-container__button--clear {
+.buttons-and-shapes .button-container #button-container__button--clear {
   grid-area: clr;
 }
-.button-container #button-container__button--equals {
+.buttons-and-shapes .button-container #button-container__button--equals {
   grid-area: equals;
   border-radius: 5px;
   font-size: 2rem;
 }
-.button-container #button-container__button--squared {
+.buttons-and-shapes .button-container #button-container__button--squared {
   grid-area: squared;
 }
-.button-container #button-container__button--sqrt {
+.buttons-and-shapes .button-container #button-container__button--sqrt {
   grid-area: sqrt;
 }
-.button-container #button-container__button--backspace {
+.buttons-and-shapes .button-container #button-container__button--backspace {
   grid-area: backspace;
 }
 
@@ -171,18 +183,42 @@ footer .footer__light-mode-button--light {
 }
 
 @media screen and (min-width: 768px) {
-  .button-container {
+  .buttons-and-shapes .side-shape {
+    display: flex;
+    border-top: 200px solid transparent;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .buttons-and-shapes .side-shape--light {
+    background-color: rgb(226, 0, 226);
+    border-color: rgb(220, 182, 231);
+  }
+  .buttons-and-shapes .side-shape--1 {
+    border-left: calc(3 * (100vw - 800px) / 8) solid rgb(128, 128, 128);
+    margin-right: calc((100vw - 800px) / 8);
+  }
+  .buttons-and-shapes .side-shape--1--light {
+    border-left: calc(3 * (100vw - 800px) / 8) solid rgb(226, 0, 226);
+  }
+  .buttons-and-shapes .side-shape--2 {
+    border-right: calc(3 * (100vw - 800px) / 8) solid rgb(128, 128, 128);
+    margin-left: calc((100vw - 800px) / 8);
+  }
+  .buttons-and-shapes .side-shape--2--light {
+    border-right: calc(3 * (100vw - 800px) / 8) solid rgb(226, 0, 226);
+  }
+  .buttons-and-shapes .button-container {
     max-width: 800px;
   }
-  .button-container .button-container__button {
+  .buttons-and-shapes .button-container .button-container__button {
     width: 100%;
     max-width: 100%;
     font-size: 2rem;
   }
-  .button-container #button-container__button--ran {
+  .buttons-and-shapes .button-container #button-container__button--ran {
     font-size: 1.5rem;
   }
-  .button-container #button-container__button--equals {
+  .buttons-and-shapes .button-container #button-container__button--equals {
     font-size: 2.5rem;
   }
 }/*# sourceMappingURL=style.css.map */
