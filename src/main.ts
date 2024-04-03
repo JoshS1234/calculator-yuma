@@ -50,7 +50,7 @@ const lightModeButton = document.querySelector(
 const sideShape1 = document.querySelector(".side-shape--1") as HTMLDivElement;
 const sideShape2 = document.querySelector(".side-shape--2") as HTMLDivElement;
 
-const body = document.querySelector(".main-body");
+const main = document.querySelector(".main");
 const screenBackground = document.querySelectorAll(".screen");
 const footerTitle = document.querySelector(".footer__title");
 
@@ -79,8 +79,8 @@ if (!numberButtons) {
   throw new Error("backspace button issue");
 } else if (!lightModeButton) {
   throw new Error("light mode button issue");
-} else if (!body) {
-  throw new Error("body issue");
+} else if (!main) {
+  throw new Error("main issue");
 } else if (!screenBackground) {
   throw new Error("screen issue");
 } else if (!sideShape1) {
@@ -446,7 +446,7 @@ const handleLightMode = () => {
   const mostButtons = document.querySelectorAll(".button-container__button");
 
   if (!lightMode) {
-    body?.classList.add("main-body--light");
+    main?.classList.add("main--light");
     screenHeader?.classList.add("screen__output-header--light");
     screenHeader2?.classList.add("screen__output-header--light");
     footerTitle?.classList.add("footer__title--light");
@@ -464,7 +464,7 @@ const handleLightMode = () => {
 
     lightMode = true;
   } else {
-    body?.classList.remove("main-body--light");
+    main?.classList.remove("main--light");
     screenHeader?.classList.remove("screen__output-header--light");
     screenHeader2?.classList.remove("screen__output-header--light");
     footerTitle?.classList.remove("footer__title--light");

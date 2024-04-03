@@ -5,19 +5,23 @@
   box-sizing: border-box;
 }
 
-.main-body {
+.main {
   background-color: black;
   display: flex;
   flex-direction: column;
   align-items: center;
   font-family: "Tauri", Arial, Helvetica, sans-serif;
+  height: 100vh;
+  width: 100%;
+  max-width: 1000px;
 }
-.main-body--light {
+.main--light {
   background-color: rgb(220, 182, 231);
 }
 
 .screen {
   width: 95%;
+  max-width: 1100px;
   height: 10vh;
   background-color: rgb(0, 71, 0);
   display: flex;
@@ -34,7 +38,7 @@
 }
 .screen .screen__output-header {
   color: white;
-  font-size: 1.4rem;
+  font-size: min(8vw, 40px);
   height: -moz-fit-content;
   height: fit-content;
   text-wrap: wrap;
@@ -99,7 +103,7 @@
 }
 .buttons-and-shapes .button-container #button-container__button--ran {
   grid-area: ran;
-  font-size: 3vw;
+  font-size: 3.5vw;
 }
 .buttons-and-shapes .button-container #button-container__button--minus {
   grid-area: minus;
@@ -195,6 +199,12 @@ footer .footer__light-mode-button--light {
 }
 
 @media screen and (min-width: 768px) {
+  body {
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   .buttons-and-shapes .side-shape {
     display: flex;
     border-top: 200px solid transparent;
@@ -206,18 +216,48 @@ footer .footer__light-mode-button--light {
     border-color: rgb(220, 182, 231);
   }
   .buttons-and-shapes .side-shape--1 {
-    border-left: calc(3 * (100vw - 800px) / 8) solid rgb(128, 128, 128);
-    margin-right: calc((100vw - 800px) / 8);
+    border-left: min(3 * (100vw - 800px) / 8, 75px) solid rgb(128, 128, 128);
+    margin-right: min((100vw - 800px) / 8, 25px);
   }
   .buttons-and-shapes .side-shape--1--light {
-    border-left: calc(3 * (100vw - 800px) / 8) solid rgb(226, 0, 226);
+    border-left: min(75px, 3 * (100vw - 800px) / 8) solid rgb(226, 0, 226);
   }
   .buttons-and-shapes .side-shape--2 {
-    border-right: calc(3 * (100vw - 800px) / 8) solid rgb(128, 128, 128);
-    margin-left: calc((100vw - 800px) / 8);
+    border-right: min(75px, 3 * (100vw - 800px) / 8) solid rgb(128, 128, 128);
+    margin-left: min((100vw - 800px) / 8, 25px);
   }
   .buttons-and-shapes .side-shape--2--light {
-    border-right: calc(3 * (100vw - 800px) / 8) solid rgb(226, 0, 226);
+    border-right: min(75px, 3 * (100vw - 800px) / 8) solid rgb(226, 0, 226);
+  }
+  .buttons-and-shapes .button-container {
+    max-width: 800px;
+  }
+  .buttons-and-shapes .button-container .button-container__button {
+    width: 100%;
+    max-width: 100%;
+    font-size: 2rem;
+  }
+  .buttons-and-shapes .button-container #button-container__button--ran {
+    font-size: 1.5rem;
+  }
+  .buttons-and-shapes .button-container #button-container__button--equals {
+    font-size: 2.5rem;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .buttons-and-shapes .side-shape--1 {
+    border-left: 75px solid rgb(128, 128, 128);
+    margin-right: 25px;
+  }
+  .buttons-and-shapes .side-shape--1--light {
+    border-left: 75px solid rgb(226, 0, 226);
+  }
+  .buttons-and-shapes .side-shape--2 {
+    border-right: 75px solid rgb(128, 128, 128);
+    margin-left: 25px;
+  }
+  .buttons-and-shapes .side-shape--2--light {
+    border-right: 75px solid rgb(226, 0, 226);
   }
   .buttons-and-shapes .button-container {
     max-width: 800px;
