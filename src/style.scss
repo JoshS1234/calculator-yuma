@@ -15,6 +15,7 @@
   height: 100vh;
   width: 100%;
   max-width: 1000px;
+  padding: 10px;
 
   &--light {
     background-color: $main-background-color-light;
@@ -24,7 +25,8 @@
 .screen {
   width: 95%;
   max-width: 1100px;
-  height: 10vh;
+  min-height: 40px;
+  height: 13vh;
   background-color: $calculator-screen-color;
   display: flex;
   flex-direction: row;
@@ -41,7 +43,7 @@
 
   .screen__output-header {
     color: $main-writing-color;
-    font-size: min(8vw, 40px);
+    font-size: min(5vh, 6vw, 40px);
     height: fit-content;
     text-wrap: wrap;
     word-wrap: break-word;
@@ -57,6 +59,7 @@
   display: flex;
   flex-direction: row;
   width: 100%;
+  height: 70vh;
 
   .header-shape1 {
     display: none;
@@ -73,7 +76,6 @@
     grid-template-areas: "clr backspace ran divide" "seven eight nine mult" "four five six minus" "one two three plus" "nought squared sqrt plusMinus" "equals equals equals equals";
     justify-items: center;
     width: 90%;
-    min-height: 500px;
     height: fit-content;
     margin: 20px auto;
     gap: 10px;
@@ -82,9 +84,9 @@
       min-width: 60px;
       width: 100%;
       max-width: 100%;
-      min-height: 70px;
-      height: 12vw;
-      max-height: 80px;
+      min-height: 40px;
+      height: 9vh;
+      max-height: 100px;
       background-color: $general-button-color;
       color: $main-writing-color;
       font-size: 2rem;
@@ -212,6 +214,11 @@ footer {
   }
 
   .footer__light-mode-button {
+    height: 7vh;
+    max-height: 100px;
+    font-size: 2rem;
+    font-weight: bold;
+
     min-width: 90px;
     width: 30%;
     max-width: 30%;
@@ -229,16 +236,17 @@ footer {
       box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
     }
   }
+
+  .footer__cricket-noise {
+    display: none;
+  }
+
+  .footer__cricket-noise-button {
+    display: none;
+  }
 }
 
 @media screen and (min-width: 768px) {
-  body {
-    background-color: red;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
   .buttons-and-shapes {
     .side-shape {
       display: flex;
@@ -289,9 +297,65 @@ footer {
       }
     }
   }
+
+  footer {
+    .footer__cricket-noise-button {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      height: 7vh;
+      max-height: 100px;
+      font-size: min(3vw, 30px);
+      font-weight: bold;
+      min-width: 90px;
+      width: 30%;
+      max-width: 30%;
+      background-color: $general-button-color;
+      color: $main-writing-color;
+      border-radius: 10px;
+      border: 2px solid white;
+      font-family: $main-font;
+      box-shadow: 4px 4px 8px rgba(248, 246, 246, 0.3);
+
+      &--light {
+        background-color: $general-button-color-light;
+        color: $main-writing-color-light;
+        box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+      }
+    }
+  }
 }
 
 @media screen and (min-width: 1000px) {
+  .body {
+    background-image: url("https://llobe.com/wp-content/uploads/2015/02/desk-background-images.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    height: 100vh;
+
+    &--light {
+      background-image: url("https://media.istockphoto.com/id/583726578/photo/wood-desk-plank-to-use-as-background-or-texture.jpg?s=612x612&w=0&k=20&c=nZuqX58HAgvD5UkumW_z0xfjeKu-hWncgQbstb4k35A=");
+    }
+  }
+
+  .main {
+    height: 95vh;
+    border-radius: 20px;
+    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.5);
+    padding-bottom: 20px;
+    border: 2px solid rgb(97, 97, 97);
+
+    &--light {
+      box-shadow: 8px 8px 16px rgba(255, 255, 255, 0.2);
+      border: 2px solid rgb(145, 145, 145);
+    }
+  }
+
   .buttons-and-shapes {
     .side-shape--1 {
       border-left: calc(3 * (200px) / 8) solid $sidebar-color;
@@ -312,6 +376,7 @@ footer {
 
     .button-container {
       max-width: 800px;
+      height: 60vh;
 
       .button-container__button {
         width: 100%;

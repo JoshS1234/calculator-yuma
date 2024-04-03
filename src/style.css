@@ -14,6 +14,7 @@
   height: 100vh;
   width: 100%;
   max-width: 1000px;
+  padding: 10px;
 }
 .main--light {
   background-color: rgb(220, 182, 231);
@@ -22,7 +23,8 @@
 .screen {
   width: 95%;
   max-width: 1100px;
-  height: 10vh;
+  min-height: 40px;
+  height: 13vh;
   background-color: rgb(0, 71, 0);
   display: flex;
   flex-direction: row;
@@ -38,7 +40,7 @@
 }
 .screen .screen__output-header {
   color: white;
-  font-size: min(8vw, 40px);
+  font-size: min(5vh, 6vw, 40px);
   height: -moz-fit-content;
   height: fit-content;
   text-wrap: wrap;
@@ -53,6 +55,7 @@
   display: flex;
   flex-direction: row;
   width: 100%;
+  height: 70vh;
 }
 .buttons-and-shapes .header-shape1 {
   display: none;
@@ -67,7 +70,6 @@
   grid-template-areas: "clr backspace ran divide" "seven eight nine mult" "four five six minus" "one two three plus" "nought squared sqrt plusMinus" "equals equals equals equals";
   justify-items: center;
   width: 90%;
-  min-height: 500px;
   height: -moz-fit-content;
   height: fit-content;
   margin: 20px auto;
@@ -77,9 +79,9 @@
   min-width: 60px;
   width: 100%;
   max-width: 100%;
-  min-height: 70px;
-  height: 12vw;
-  max-height: 80px;
+  min-height: 40px;
+  height: 9vh;
+  max-height: 100px;
   background-color: rgb(53, 50, 50);
   color: white;
   font-size: 2rem;
@@ -181,6 +183,10 @@ footer .footer__title--light {
   color: rgb(135, 0, 161);
 }
 footer .footer__light-mode-button {
+  height: 7vh;
+  max-height: 100px;
+  font-size: 2rem;
+  font-weight: bold;
   min-width: 90px;
   width: 30%;
   max-width: 30%;
@@ -197,14 +203,14 @@ footer .footer__light-mode-button--light {
   color: rgb(135, 0, 161);
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
 }
+footer .footer__cricket-noise {
+  display: none;
+}
+footer .footer__cricket-noise-button {
+  display: none;
+}
 
 @media screen and (min-width: 768px) {
-  body {
-    background-color: red;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
   .buttons-and-shapes .side-shape {
     display: flex;
     border-top: 200px solid transparent;
@@ -243,8 +249,56 @@ footer .footer__light-mode-button--light {
   .buttons-and-shapes .button-container #button-container__button--equals {
     font-size: 2.5rem;
   }
+  footer .footer__cricket-noise-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 7vh;
+    max-height: 100px;
+    font-size: min(3vw, 30px);
+    font-weight: bold;
+    min-width: 90px;
+    width: 30%;
+    max-width: 30%;
+    background-color: rgb(53, 50, 50);
+    color: white;
+    border-radius: 10px;
+    border: 2px solid white;
+    font-family: "Tauri", Arial, Helvetica, sans-serif;
+    box-shadow: 4px 4px 8px rgba(248, 246, 246, 0.3);
+  }
+  footer .footer__cricket-noise-button--light {
+    background-color: rgb(253, 202, 255);
+    color: rgb(135, 0, 161);
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+  }
 }
 @media screen and (min-width: 1000px) {
+  .body {
+    background-image: url("https://llobe.com/wp-content/uploads/2015/02/desk-background-images.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    height: 100vh;
+  }
+  .body--light {
+    background-image: url("https://media.istockphoto.com/id/583726578/photo/wood-desk-plank-to-use-as-background-or-texture.jpg?s=612x612&w=0&k=20&c=nZuqX58HAgvD5UkumW_z0xfjeKu-hWncgQbstb4k35A=");
+  }
+  .main {
+    height: 95vh;
+    border-radius: 20px;
+    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.5);
+    padding-bottom: 20px;
+    border: 2px solid rgb(97, 97, 97);
+  }
+  .main--light {
+    box-shadow: 8px 8px 16px rgba(255, 255, 255, 0.2);
+    border: 2px solid rgb(145, 145, 145);
+  }
   .buttons-and-shapes .side-shape--1 {
     border-left: 75px solid rgb(128, 128, 128);
     margin-right: 25px;
@@ -261,6 +315,7 @@ footer .footer__light-mode-button--light {
   }
   .buttons-and-shapes .button-container {
     max-width: 800px;
+    height: 60vh;
   }
   .buttons-and-shapes .button-container .button-container__button {
     width: 100%;
