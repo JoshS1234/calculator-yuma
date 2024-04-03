@@ -214,9 +214,10 @@ const handleNumberClick = (e: Event) => {
   }
 
   if (
-    screenHeader.textContent.length > 7 ||
-    screenHeader.textContent.length + screenHeader2.textContent.length > 15
+    screenHeader.textContent.length > 8 ||
+    screenHeader2.textContent.length > 15
   ) {
+    alert("too many digits for screen");
     return;
   }
 
