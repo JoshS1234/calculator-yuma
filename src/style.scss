@@ -25,7 +25,8 @@
 .screen {
   width: 95%;
   max-width: 1100px;
-  height: 12vh;
+  min-height: 40px;
+  height: 13vh;
   background-color: $calculator-screen-color;
   display: flex;
   flex-direction: row;
@@ -42,7 +43,7 @@
 
   .screen__output-header {
     color: $main-writing-color;
-    font-size: min(6vw, 40px);
+    font-size: min(5vh, 6vw, 40px);
     height: fit-content;
     text-wrap: wrap;
     word-wrap: break-word;
@@ -84,7 +85,7 @@
       width: 100%;
       max-width: 100%;
       min-height: 55px;
-      height: 7vh;
+      height: 9vh;
       max-height: 100px;
       background-color: $general-button-color;
       color: $main-writing-color;
