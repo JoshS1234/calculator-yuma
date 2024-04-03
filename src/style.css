@@ -79,7 +79,7 @@
   min-width: 60px;
   width: 100%;
   max-width: 100%;
-  min-height: 55px;
+  min-height: 40px;
   height: 9vh;
   max-height: 100px;
   background-color: rgb(53, 50, 50);
@@ -183,6 +183,10 @@ footer .footer__title--light {
   color: rgb(135, 0, 161);
 }
 footer .footer__light-mode-button {
+  height: 7vh;
+  max-height: 100px;
+  font-size: 2rem;
+  font-weight: bold;
   min-width: 90px;
   width: 30%;
   max-width: 30%;
@@ -282,6 +286,7 @@ footer .footer__light-mode-button--light {
   }
   .buttons-and-shapes .button-container {
     max-width: 800px;
+    height: 60vh;
   }
   .buttons-and-shapes .button-container .button-container__button {
     width: 100%;
