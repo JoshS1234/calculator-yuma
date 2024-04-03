@@ -56,6 +56,11 @@ const main = document.querySelector(".main");
 const screenBackground = document.querySelectorAll(".screen");
 const footerTitle = document.querySelector(".footer__title");
 
+const audio = document.querySelector(
+  ".footer__cricket-noise"
+) as HTMLAudioElement;
+const audioButton = document.querySelector(".footer__cricket-noise-button");
+
 //error handling with button imports from HTML
 if (!numberButtons) {
   throw new Error("number button issue");
@@ -91,6 +96,10 @@ if (!numberButtons) {
   throw new Error("sideShape2 issue");
 } else if (!body) {
   throw new Error("body issue");
+} else if (!audio) {
+  throw new Error("audio issue");
+} else if (!audioButton) {
+  throw new Error("audio button issue");
 }
 
 //useful variables
@@ -107,6 +116,8 @@ const clearAll = () => {
   calculation = [];
   hasEqualled = false;
 };
+//background music
+let hasMusic = false;
 
 //My version of the "eval()" function. It can handle negatives, squares and square roots.
 //Is a very complicated system to account for lots of edge cases involving ordering of negatives, roots and squares
@@ -467,6 +478,7 @@ const handleLightMode = () => {
     sideShape1.classList.add("side-shape--1--light");
     sideShape2.classList.add("side-shape--2--light");
     body.classList.add("body--light");
+    audioButton.classList.add("footer__cricket-noise-button--light");
 
     lightMode = true;
   } else {
@@ -486,8 +498,19 @@ const handleLightMode = () => {
     sideShape1.classList.remove("side-shape--1--light");
     sideShape2.classList.remove("side-shape--2--light");
     body.classList.remove("body--light");
+    audioButton.classList.remove("footer__cricket-noise-button--light");
 
     lightMode = false;
+  }
+};
+
+const handleMusic = () => {
+  if (hasMusic) {
+    audio.pause();
+    hasMusic = false;
+  } else {
+    audio.play();
+    hasMusic = true;
   }
 };
 
@@ -508,3 +531,4 @@ sqrtButton.addEventListener("click", handleSqrt);
 ranButton.addEventListener("click", handleRan);
 backspaceButton.addEventListener("click", handleBackspace);
 lightModeButton.addEventListener("click", handleLightMode);
+audioButton?.addEventListener("click", handleMusic);

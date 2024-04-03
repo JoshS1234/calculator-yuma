@@ -236,6 +236,14 @@ footer {
       box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
     }
   }
+
+  .footer__cricket-noise {
+    display: none;
+  }
+
+  .footer__cricket-noise-button {
+    display: none;
+  }
 }
 
 @media screen and (min-width: 768px) {
@@ -286,6 +294,33 @@ footer {
 
       #button-container__button--equals {
         font-size: 2.5rem;
+      }
+    }
+  }
+
+  footer {
+    .footer__cricket-noise-button {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      height: 7vh;
+      max-height: 100px;
+      font-size: min(3vw, 30px);
+      font-weight: bold;
+      min-width: 90px;
+      width: 30%;
+      max-width: 30%;
+      background-color: $general-button-color;
+      color: $main-writing-color;
+      border-radius: 10px;
+      border: 2px solid white;
+      font-family: $main-font;
+      box-shadow: 4px 4px 8px rgba(248, 246, 246, 0.3);
+
+      &--light {
+        background-color: $general-button-color-light;
+        color: $main-writing-color-light;
+        box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
       }
     }
   }

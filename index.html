@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./src/style.css" />
+    <link rel="icon" type="image/x-icon" href="./favicon.png" />
     <title>Josh - Calculator</title>
   </head>
   <body class="body">
@@ -156,6 +157,18 @@
           value="light mode"
         />
         <h1 class="footer__title">Calcul8</h1>
+        <input
+          type="button"
+          name="Sound"
+          value="♫ Music ♫"
+          class="footer__cricket-noise-button"
+        />
+        <audio loop controls class="footer__cricket-noise">
+          <source
+            src="https://upload.wikimedia.org/wikipedia/commons/6/6e/609562_migfus20_background-music.ogg"
+            type="audio/ogg"
+          />
+        </audio>
       </footer>
 
       <script type="module" src="/src/main.ts"></script>

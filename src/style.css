@@ -203,6 +203,12 @@ footer .footer__light-mode-button--light {
   color: rgb(135, 0, 161);
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
 }
+footer .footer__cricket-noise {
+  display: none;
+}
+footer .footer__cricket-noise-button {
+  display: none;
+}
 
 @media screen and (min-width: 768px) {
   .buttons-and-shapes .side-shape {
@@ -242,6 +248,29 @@ footer .footer__light-mode-button--light {
   }
   .buttons-and-shapes .button-container #button-container__button--equals {
     font-size: 2.5rem;
+  }
+  footer .footer__cricket-noise-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 7vh;
+    max-height: 100px;
+    font-size: min(3vw, 30px);
+    font-weight: bold;
+    min-width: 90px;
+    width: 30%;
+    max-width: 30%;
+    background-color: rgb(53, 50, 50);
+    color: white;
+    border-radius: 10px;
+    border: 2px solid white;
+    font-family: "Tauri", Arial, Helvetica, sans-serif;
+    box-shadow: 4px 4px 8px rgba(248, 246, 246, 0.3);
+  }
+  footer .footer__cricket-noise-button--light {
+    background-color: rgb(253, 202, 255);
+    color: rgb(135, 0, 161);
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
   }
 }
 @media screen and (min-width: 1000px) {
