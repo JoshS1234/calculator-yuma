@@ -50,6 +50,8 @@ const lightModeButton = document.querySelector(
 const sideShape1 = document.querySelector(".side-shape--1") as HTMLDivElement;
 const sideShape2 = document.querySelector(".side-shape--2") as HTMLDivElement;
 
+const body = document.querySelector(".body");
+
 const main = document.querySelector(".main");
 const screenBackground = document.querySelectorAll(".screen");
 const footerTitle = document.querySelector(".footer__title");
@@ -87,6 +89,8 @@ if (!numberButtons) {
   throw new Error("sideShape1 issue");
 } else if (!sideShape2) {
   throw new Error("sideShape2 issue");
+} else if (!body) {
+  throw new Error("body issue");
 }
 
 //useful variables
@@ -461,6 +465,7 @@ const handleLightMode = () => {
     sideShape2.classList.add("side-shape--light");
     sideShape1.classList.add("side-shape--1--light");
     sideShape2.classList.add("side-shape--2--light");
+    body.classList.add("body--light");
 
     lightMode = true;
   } else {
@@ -479,6 +484,7 @@ const handleLightMode = () => {
     sideShape2.classList.remove("side-shape--light");
     sideShape1.classList.remove("side-shape--1--light");
     sideShape2.classList.remove("side-shape--2--light");
+    body.classList.remove("body--light");
 
     lightMode = false;
   }

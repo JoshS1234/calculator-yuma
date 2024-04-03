@@ -199,12 +199,6 @@ footer .footer__light-mode-button--light {
 }
 
 @media screen and (min-width: 768px) {
-  body {
-    background-color: red;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
   .buttons-and-shapes .side-shape {
     display: flex;
     border-top: 200px solid transparent;
@@ -245,6 +239,31 @@ footer .footer__light-mode-button--light {
   }
 }
 @media screen and (min-width: 1000px) {
+  .body {
+    background-image: url("https://llobe.com/wp-content/uploads/2015/02/desk-background-images.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    height: 100vh;
+  }
+  .body--light {
+    background-image: url("https://media.istockphoto.com/id/583726578/photo/wood-desk-plank-to-use-as-background-or-texture.jpg?s=612x612&w=0&k=20&c=nZuqX58HAgvD5UkumW_z0xfjeKu-hWncgQbstb4k35A=");
+  }
+  .main {
+    height: 95vh;
+    border-radius: 20px;
+    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.5);
+    padding-bottom: 20px;
+    border: 2px solid rgb(97, 97, 97);
+  }
+  .main--light {
+    box-shadow: 8px 8px 16px rgba(255, 255, 255, 0.2);
+    border: 2px solid rgb(145, 145, 145);
+  }
   .buttons-and-shapes .side-shape--1 {
     border-left: 75px solid rgb(128, 128, 128);
     margin-right: 25px;
